@@ -3,60 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 11:13:39 by lloncham          #+#    #+#             */
-/*   Updated: 2018/11/15 13:33:09 by lloncham         ###   ########.fr       */
+/*   Created: 2018/11/14 15:25:41 by louali            #+#    #+#             */
+/*   Updated: 2018/11/14 17:39:40 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count(int n)
+static int		len(int n)
 {
 	int		i;
-	int		nbr;
+	long	x;
 
-	nbr = n;
-	i = 0;
-	if (nbr < 0)
+	x = n;
+	i = 1;
+	if (x < 0)
 	{
 		i++;
-		nbr = -nbr;
+		x = -x;
 	}
-	while (nbr > 9)
+	while (x > 9)
 	{
-		nbr = nbr / 10;
+		x = x / 10;
 		i++;
 	}
 	return (i);
 }
 
-char		*ft_itoa(int n)
+static	char	*ifneg(char *str, int n, int i)
+{
+	str[0] = '-';
+	n = -n;
+	while (i > 0)
+	{
+		str[i] = (n % 10) + 48;
+		n /= 10;
+		i--;
+	}
+	return (str);
+}
+
+char			*ft_itoa(int n)
 {
 	char	*str;
 	int		i;
 
-	i = 0;
+	i = len(n);
+	if ((str = malloc(sizeof(char) * (i + 1))) == NULL)
+		return (NULL);
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));
-	i = ft_count(n);
-	if (!(str = (ft_strnew((i + 1)))))
-		return (NULL);
 	str[i] = '\0';
-	if (n == 0)
-		*str = n + '0';
-	while (n < 0)
+	i--;
+	if (n >= 0)
 	{
-		str[0] = '-';
-		n = -n;
-		str[i--] = '0' + (n % 10);
-		n = n / 10;
+		while (i >= 0)
+		{
+			str[i] = (n % 10) + 48;
+			n /= 10;
+			i--;
+		}
 	}
-	while (n > 0)
-	{
-		str[i--] = '0' + (n % 10);
-		n = n / 10;
-	}
+	if (n < 0)
+		str = ifneg(str, n, i);
 	return (str);
 }

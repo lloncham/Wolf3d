@@ -3,33 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/15 14:04:30 by lloncham          #+#    #+#             */
-/*   Updated: 2018/11/20 12:20:56 by lloncham         ###   ########.fr       */
+/*   Created: 2018/11/15 11:17:24 by louali            #+#    #+#             */
+/*   Updated: 2018/11/15 16:45:11 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstnew(void const *content, size_t content_size)
+t_list	*ft_lstnew(void	const *content, size_t content_size)
 {
-	t_list	*n;
+	t_list *list;
 
-	if (!(n = (t_list *)malloc(sizeof(t_list))))
+	list = NULL;
+	if ((list = (t_list *)malloc(sizeof(t_list))) == NULL)
 		return (NULL);
 	if (content == NULL)
 	{
-		n->content = NULL;
-		n->content_size = 0;
+		list->content = NULL;
+		list->content_size = 0;
 	}
 	else
 	{
-		if (!(n->content = ft_memalloc(content_size)))
+		if ((list->content = ft_memalloc(content_size)) == NULL)
 			return (NULL);
-		ft_memcpy(n->content, content, content_size);
-		n->content_size = content_size;
+		ft_memcpy(list->content, content, content_size);
+		list->content_size = content_size;
 	}
-	n->next = NULL;
-	return (n);
+	list->next = NULL;
+	return (list);
 }

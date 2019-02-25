@@ -3,37 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/13 11:13:28 by lloncham          #+#    #+#             */
-/*   Updated: 2018/11/16 11:48:54 by lloncham         ###   ########.fr       */
+/*   Created: 2018/11/13 15:27:38 by louali            #+#    #+#             */
+/*   Updated: 2018/11/15 18:27:53 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char const *s)
+static size_t	ft_count(char const *s)
 {
-	char	*new;
-	size_t	fst;
-	size_t	lst;
-	int		j;
+	size_t	i;
+	size_t	count;
+
+	count = 0;
+	i = 0;
+	while ((s[i] == ' ' || s[i] == '\n' || s[i] == '\t') && s[i])
+		i++;
+	if (s[i] == '\0')
+		return (i);
+	while (s[i])
+	{
+		count++;
+		i++;
+	}
+	i--;
+	while ((s[i] == ' ' || s[i] == '\n' || s[i] == '\t'))
+	{
+		count--;
+		i--;
+	}
+	return (count);
+}
+
+char			*ft_strtrim(char const *s)
+{
+	size_t	len;
+	size_t	i;
+	size_t	t;
+	char	*str;
 
 	if (s == NULL)
 		return (NULL);
-	fst = 0;
-	j = 0;
-	lst = ft_strlen(s) - 1;
-	if (*s == '\0')
-		return (ft_strnew(0));
-	while (s[fst] && (s[fst] == ' ' || s[fst] == '\n' || s[fst] == '\t'))
-		fst++;
-	while (lst > fst && (s[lst] == ' ' || s[lst] == '\n' || s[lst] == '\t'))
-		lst--;
-	if (!(new = ft_strnew(lst - fst + 1)))
+	len = ft_count(s);
+	t = 0;
+	if ((str = malloc(sizeof(char) * len + 1)) == NULL)
 		return (NULL);
-	while (fst <= lst)
-		new[j++] = s[fst++];
-	new[j] = '\0';
-	return (new);
+	i = 0;
+	while (s[i] && (s[i] == ' ' || s[i] == '\n' || s[i] == '\t'))
+		i++;
+	while (len > t)
+	{
+		str[t] = s[i];
+		i++;
+		t++;
+	}
+	str[t] = '\0';
+	return (str);
 }

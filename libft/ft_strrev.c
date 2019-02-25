@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lloncham <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/16 13:29:38 by lloncham          #+#    #+#             */
-/*   Updated: 2018/11/16 16:12:09 by lloncham         ###   ########.fr       */
+/*   Created: 2018/11/16 13:49:03 by louali            #+#    #+#             */
+/*   Updated: 2018/11/16 15:51:14 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_strrev(char *str)
 		return (NULL);
 	while (str[a])
 		a++;
-	a = a - 1;
+	a--;
 	while (b < a)
 	{
 		t = str[b];
