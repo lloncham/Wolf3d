@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 13:49:27 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/25 13:53:09 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/25 14:52:24 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,18 @@ void	ft_put_pixel(t_mlx *p, int y, int x, int color)
 	if (x < 0 || y < 0 || x >= p->size_w || y >= p->size_h)
 		return ;
 	p->img_data[y * p->size_w + x] = color;
+}
+
+int		valid_char(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i])
+			return (0);
+		i++;
+	}
+	return (1);
 }

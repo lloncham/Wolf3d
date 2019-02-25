@@ -6,13 +6,13 @@
 #    By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/25 10:08:40 by lloncham          #+#    #+#              #
-#    Updated: 2019/02/25 11:44:01 by lloncham         ###   ########.fr        #
+#    Updated: 2019/02/25 15:05:45 by lloncham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_PATH = src
 
-SRC_NAME = main.c
+SRC_NAME = main.c tools.c read.c
 
 OBJ_PATH = obj
 

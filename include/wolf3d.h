@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:43:48 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/25 13:50:56 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/25 15:14:37 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,5 +16,22 @@
 #include "../libft/libft.h"
 #include "../minilibx_macos/mlx.h"
 #include <math.h> 
+
+typedef struct		s_wolf
+{
+	void			*mlx;
+	void			*img;
+	void			*win;
+	int				*img_data;
+	int				**tab;
+	double			start_x;
+	double			start_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
+	double			time;
+	double			old_time;
+}					t_wolf;
 
 #endif

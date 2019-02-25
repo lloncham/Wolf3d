@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 11:33:09 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/25 13:55:26 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/25 14:09:24 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,16 @@ void	mlx(t_mlx *ptr)
 	mlx_loop(ptr->mlx);
 }
 
+t_wolf	init_wolf(t_wolf ptr)
+{
+	
+}
+
 int		main()
 {
 	t_wolf	ptr;
 
-	return (0);
+	ptr = init_wolf(ptr);
 	mlx(&ptr);
+	return (0);
 }
