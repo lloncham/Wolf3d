@@ -31,7 +31,7 @@ int		count_line(int fd, char **av)
 	return (nbline);
 }
 
-int		ft_count_col(char **split)
+int		ft_count_col(char *split)
 {
 	int	i;
 
@@ -41,15 +41,16 @@ int		ft_count_col(char **split)
 	return (i);
 }
 
-int		*convert(int **tab, int j, char **split, int nbcol)
+int		*convert(int **tab, int j, char *split, int nbcol)
 {
 	int		i;
 
 	i = 0;
 	while (split[i])
 	{
-		tab[j][i] = ft_atoi(split[i]);
-		free(split[i]);
+		if (split[i] == 'X')
+			split[i] = '0';
+		tab[j][i] = split[i] - '0';
 		i++;
 	}
 	if (i != nbcol)
@@ -58,43 +59,44 @@ int		*convert(int **tab, int j, char **split, int nbcol)
 	return (tab[j]);
 }
 
-void	read_line(int fd, t_fdf *d)
+void	read_line(int fd, t_wolf *d)
 {
-	char	**split;
 	char	*line;
 	int		j;
 
 	j = 0;
-	if (!(d->tab = (int **)malloc(sizeof(int *) * d->nbline)))
+	if (!(d->tab = (int **)malloc(sizeof(int *) * d->nbl)))
 		return ;
-	while (get_next_line(fd, &line))
+	while (get_next_line(fd, &line) > 0)
 	{
-		if (valid_char(line) == 0)
+		if (valid_char(line, d, j) == 0)
 			error("Unvalid char!");
-		split = ft_strsplit(line, ' ');
 		if (j == 0)
-			d->nbcol = ft_count_col(split);
-		if (!(d->tab[j] = (int *)malloc(sizeof(int) * d->nbcol)))
+			d->nbc = ft_count_col(line);
+		if (!(d->tab[j] = (int *)malloc(sizeof(int) * d->nbc)))
 			return ;
-		d->tab[j] = convert(d->tab, j, split, d->nbcol);
-		free(line);
+		d->tab[j] = convert(d->tab, j, line, d->nbc);
 		j++;
 	}
 }
 
-t_fdf	read_file(char **av)
+t_wolf	read_file(char **av)
 {
 	int		fd;
-	t_fdf	d;
+	t_wolf	d;
 
-	if (valid_file(av[1]) == 0)
-		error("Unvalid file!");
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		error("Error");
-	d.nbline = count_line(fd, av);
-	if (d.nbline == 0)
+	d.nbl = count_line(fd, av);
+	if (d.nbl == 0)
 		error("nothing into the file");
 	read_line(fd, &d);
 	close(fd);
 	return (d);
+}
+
+int		main(int ac, char **av)
+{
+	read_file(av);
+	return (0);
 }

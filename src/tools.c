@@ -18,28 +18,35 @@ void	error(char *str)
 	exit(0);
 }
 
-int		clear_img(t_mlx *ptr)
+int		clear_img(t_wolf *ptr)
 {
-	bzero(ptr->img_data, ptr->size_w * ptr->size_h * 4);
+//	bzero(ptr->img_data, ptr->size_w * ptr->size_h * 4);
 	return (0);
 }
 
-void	ft_put_pixel(t_mlx *p, int y, int x, int color)
+void	ft_put_pixel(t_wolf *p, int y, int x, int color)
 {
-	if (x < 0 || y < 0 || x >= p->size_w || y >= p->size_h)
+//	if (x < 0 || y < 0 || x >= p->size_w || y >= p->size_h)
 		return ;
-	p->img_data[y * p->size_w + x] = color;
+//	p->img_data[y * p->size_w + x] = color;
 }
 
-int		valid_char(char *str)
+int		valid_char(char *str, t_wolf *r, int y)
 {
 	int i;
 
 	i = 0;
+	r->j = 0;
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i])
+		if (!ft_isdigit(str[i]) && str[i] != 'X')
 			return (0);
+		if (str[i] == 'X')
+		{
+			r->start_x = i;
+			r->start_y = y;
+			r->j++;
+		}
 		i++;
 	}
 	return (1);
