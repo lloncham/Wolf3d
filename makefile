@@ -6,7 +6,7 @@
 #    By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/25 10:08:40 by lloncham          #+#    #+#              #
-#    Updated: 2019/02/25 15:05:45 by lloncham         ###   ########.fr        #
+#    Updated: 2019/02/26 13:32:19 by lloncham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ $(NAME): $(OBJ)
 clean:
 	$(MAKE) -C libft clean
 	$(MAKE) -C minilibx_macos clean
-	rm -rf $(OBJ) 
+	rm -rf $(OBJ_PATH) 
 
 fclean: clean
 	rm -f $(NAME)

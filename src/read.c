@@ -6,7 +6,11 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 14:47:42 by lloncham          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/02/26 14:42:57 by louali           ###   ########.fr       */
+=======
+/*   Updated: 2019/02/26 13:43:47 by lloncham         ###   ########.fr       */
+>>>>>>> lloncham
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +92,7 @@ void	read_line(int fd, t_wolf *d)
 	int		j;
 
 	j = 0;
+	d->j = 0;
 	if (!(d->tab = (int **)malloc(sizeof(int *) * d->nbl)))
 		return ;
 	while (get_next_line(fd, &line))
@@ -109,7 +114,7 @@ int	**read_file(char **av)
 {
 	int		fd;
 	t_wolf	d;
-
+	
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		error("Error");
 	d.nbl = count_line(fd, av);
@@ -117,5 +122,9 @@ int	**read_file(char **av)
 		error("nothing into the file");
 	read_line(fd, &d);
 	close(fd);
+<<<<<<< HEAD
 	return (d.tab);
+=======
+	return (d);
+>>>>>>> lloncham
 }
