@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 14:47:42 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/26 11:00:21 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/26 13:18:21 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,10 +118,4 @@ t_wolf	read_file(char **av)
 	read_line(fd, &d);
 	close(fd);
 	return (d);
-}
-
-int		main(int ac, char **av)
-{
-	read_file(av);
-	return (0);
 }
