@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:43:48 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/25 16:00:01 by louali           ###   ########.fr       */
+/*   Updated: 2019/02/26 14:48:04 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,7 @@ typedef struct		s_wolf
 	double			old_time;
 }					t_wolf;
 
+int					**read_file(char **av);
+void				error(char *s);
+int					valid_char(char *s, t_wolf *r, int y);
 #endif
