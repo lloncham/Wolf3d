@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 11:33:09 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/25 14:09:24 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/26 13:43:02 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ void	mlx(t_wolf *ptr)
 	mlx_loop(ptr->mlx);
 }
 
-int		main()
+int		main(int ac, char **av)
 {
 	t_wolf	ptr;
 
-	ptr = (ptr);
-	mlx(&ptr);
+	if (ac != 2)
+		error("usage : [./wolf3d] [map]");
+	ptr = read_file(av);
+	//mlx(&ptr);
 	return (0);
 }
