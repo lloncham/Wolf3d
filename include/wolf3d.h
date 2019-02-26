@@ -6,11 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:43:48 by lloncham          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/02/26 14:48:04 by louali           ###   ########.fr       */
-=======
-/*   Updated: 2019/02/26 13:28:58 by lloncham         ###   ########.fr       */
->>>>>>> lloncham
+/*   Updated: 2019/02/27 00:29:35 by lisa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +17,13 @@
 #include "../minilibx_macos/mlx.h"
 #include <math.h> 
 
-#define W 480
-#define H 240
+#define W 1180
+#define H 720
+#define GAUCHE 123
+#define DROITE 124
+#define HAUT 126
+#define BAS 125
+#define DEL 51
 
 typedef struct		s_wolf
 {
@@ -40,7 +41,8 @@ typedef struct		s_wolf
 //	int				y_max;
 	double			start_x;
 	double			start_y;
-
+	double			pos_x;
+	double			pos_y;
 //raycasting
 	double			dir_x;
 	double			dir_y;
@@ -57,8 +59,8 @@ typedef struct		s_wolf
 	double			sidedist_y;
 	double			deltadist_x;
 	double			deltadist_y;
-	double			step_x;
-	double			step_y;
+	int			step_x;
+	int			step_y;
 	int				hit;
 	int				side;
 	double			perpwalldist;
@@ -72,15 +74,11 @@ typedef struct		s_wolf
 	double			old_time;
 }					t_wolf;
 
-<<<<<<< HEAD
-int					**read_file(char **av);
+t_wolf					read_file(char **av);
 void				error(char *s);
 int					valid_char(char *s, t_wolf *r, int y);
-=======
 int		valid_char(char *str, t_wolf *r, int y);
 void	error(char *str);
-t_wolf	read_file(char **av);
 void	ft_put_pixel(int x, int y, int color, t_wolf *p);
 
->>>>>>> lloncham
 #endif

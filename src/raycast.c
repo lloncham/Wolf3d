@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -7,134 +6,15 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 13:27:04 by louali            #+#    #+#             */
-/*   Updated: 2019/02/26 16:30:50 by louali           ###   ########.fr       */
+/*   Updated: 2019/02/27 00:28:22 by lisa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/wolf3d.h"
-#include <math.h>
 
-void	put_pixel(int x, int y, int h, int w, int color, int *data)
-{
-	printf("x : %d, y : %d\n", x, y);
-	if (x < 0 || y < 0 || y >= w || x >= h)
-		return ;
-	printf("ok");
-	data[y * h + x] = color;
-}
-void	raycast(int *data, void *mlx, void *win, void *img)
-{
-	int w = 480, h = 240;
-	int tab[25][25] =
-	{{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-	{1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,1,0,1,1,1,1},
-	{1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1},
-	{1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,0,1},
-	{1,1,0,0,0,0,0,0,1,1,0,1,0,1,0,1,1,1,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,1,0,0,1},
-	{1,1,0,0,0,0,0,0,1,1,0,1,0,1,0,1,1,1,1,1,0,1,1,1,1},
-	{1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1},
-	{1,1,1,1,0,1,1,1,1,1,1,1,0,0,1,0,1,1,0,0,0,0,0,0,1},
-	{1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,0,1,1,1,0,0,0,1,0,1},
-	{1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,0,1},
-	{1,1,0,0,0,0,0,1,1,1,0,0,0,1,1,1,1,1,1,0,0,0,1,1,1},
-	{1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,1,0,1,0,1,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,1,0,1,0,1,0,0,1},
-	{1,1,0,0,0,0,0,1,1,1,0,0,0,1,1,1,1,1,1,0,0,0,1,1,1},
-	{1,1,0,0,0,0,0,1,1,1,0,0,0,1,1,1,1,1,1,0,0,0,1,1,1},
-	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
-	double posx = 22, posy = 11.5, dirx = -1, diry = 0, planex = 0, planey= 1;
-
-	int x = 0;
-	while (x <= w)
-	{
-		double camerax = (2*x/w)-1, rayposx = posx, rayposy = posy, raydirx = dirx+planex*camerax, raydiry = diry+planey*camerax;
-	
-		int mapx = (int)rayposx, mapy =(int)rayposy;
-		
-		double sidedistx, sidedisty;
-
-		double deltadistx = sqrt(1 +(raydiry*raydiry) / (raydirx*raydirx));
-		double deltadisty = sqrt(1 +(raydirx*raydirx) / (raydiry*raydiry));
-
-		double stepx, stepy;
-
-		int hit = 0, side;
-		
-		double perpwalldist;
-
-		if (raydirx<0)
-		{
-			stepx=-1;
-			sidedistx = (rayposx - mapx) * deltadistx;
-		}
-		else
-		{
-			stepx = 1;
-			sidedistx = (mapx + 1.0 - rayposx) * deltadistx;
-		}
-		if (raydiry<0)
-		{
-			stepy = -1;
-			sidedisty = (rayposy - mapy) * deltadisty;
-		}
-		else
-		{
-			stepy = 1;
-			sidedisty = (mapy + 1.0 - rayposy) * deltadisty;
-		}
-		while (hit == 0)
-		{
-			if (sidedistx<sidedisty)
-			{
-				sidedistx += deltadistx;
-				mapx += stepx;
-				side = 0;
-			}
-			else
-			{
-				sidedisty += deltadisty;
-				mapy += stepy;
-				side = 1;
-			}
-			if (tab[mapx][mapy] >0)
-				hit = 1;
-		}
-		if (side == 0)
-			perpwalldist = fabs((mapx-rayposx+(1-stepx)/2)/raydirx);
-		else
-			perpwalldist = fabs((mapy-rayposy+(1-stepy)/2)/raydiry);
-
-		int hauteurligne = abs((h / (int)perpwalldist));
-		int drawstart = (int)(-hauteurligne/2+h/2);
-		int drawend = (int)(hauteurligne/2+h/2);
-
-
-		if (drawstart < 0)
-			drawstart = 0;
-		if (drawend >= h)
-			drawend = h-1;
-		int y = drawstart;
-		while (y < drawend)
-		{
-			printf("y : %d, drawend : %d\n", y, drawend);
-			int color = 0xf2f2f2;
-			if (side == 1)
-				color = 0xCCCCCC;
-			put_pixel(y, x, 240, 480, color, img);
-=======
-#include "../include/wolf3d.h"
 void	raycast(t_wolf *r)
 {	
-	int tab[25][25] =
+/*	int tab[25][25] =
 	{{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		{1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
 		{1,0,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -159,19 +39,16 @@ void	raycast(t_wolf *r)
 		{1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,1,0,1,0,1,0,0,1},
 		{1,1,0,0,0,0,0,1,1,1,0,0,0,1,1,1,1,1,1,0,0,0,1,1,1},
 		{1,1,0,0,0,0,0,1,1,1,0,0,0,1,1,1,1,1,1,0,0,0,1,1,1},
-		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};
-	double posx = 22, posy = 11.5;
-	r->dir_x = -1;
-	r->dir_y = 0;
-	r->plane_x = 0;
-	r->plane_y= 1;
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};*/
+	if (r->y == 0)
+		r->pos_x = r->start_x, r->pos_y = r->start_y;
 
-	int x = 0;
+	double x = 0, y = 0;
 	while (x <= W)
 	{
 		r->camera_x = (2 * x / W) - 1;
-		r->raypos_x = posx;
-		r->raypos_y = posy;
+		r->raypos_x = r->pos_x;
+		r->raypos_y = r->pos_y;
 		r->raydir_x = r->dir_x + r->plane_x * r->camera_x;
 		r->raydir_y = r->dir_y + r->plane_y * r->camera_x;
 		r->map_x = (int)r->raypos_x;
@@ -214,7 +91,7 @@ void	raycast(t_wolf *r)
 				r->map_y += r->step_y;
 				r->side = 1;
 			}
-			if (tab[r->map_x][r->map_y] > 0)
+			if (r->tab[r->map_x][r->map_y] > 0)
 				r->hit = 1;
 		}
 //distance corrigee!
@@ -232,46 +109,137 @@ void	raycast(t_wolf *r)
 		if (r->draw_end >= H)
 			r->draw_end = H - 1;
 //tracer la colonne!
-		int y = r->draw_start;
+		y = r->draw_start;
 		while (y < r->draw_end)
 		{
 			r->color = 0xf2f2f2;
 			if (r->side == 1)
 				r->color = 0xCCCCCC;
-			ft_put_pixel(x, y, r->color, r);
->>>>>>> lloncham
+			ft_put_pixel((int)x, (int)y, r->color, r);
+			y++;
+		}
+		if (r->draw_end < 0)
+			r->draw_end = H;
+		y = r->draw_end;
+		while (y < H)
+		{
+			ft_put_pixel(x, y, 0x006666, r);
+			ft_put_pixel(x, H-y-1, 0xcc0000, r);
 			y++;
 		}
 		x++;
 	}
-<<<<<<< HEAD
-	mlx_put_image_to_window(data, win, img, 0, 0);
-=======
 	mlx_put_image_to_window(r->img_data, r->win, r->img, 0, 0);
->>>>>>> lloncham
+}
+
+int		deal_key(int key, t_wolf *ptr)
+{
+/*	int tab[25][25] =
+	{{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+		{1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1,1,1,0,1,1,1,1},
+		{1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,1},
+		{1,1,1,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,0,1},
+		{1,1,0,0,0,0,0,0,1,1,0,1,0,1,0,1,1,1,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,1,0,1,0,0,1},
+		{1,1,0,0,0,0,0,0,1,1,0,1,0,1,0,1,1,1,1,1,0,1,1,1,1},
+		{1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,0,1,1,1,1},
+		{1,1,1,1,0,1,1,1,1,1,1,1,0,0,1,0,1,1,0,0,0,0,0,0,1},
+		{1,1,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,0,1,1,1,0,0,0,1,0,1},
+		{1,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,0,1},
+		{1,1,0,0,0,0,0,1,1,1,0,0,0,1,1,1,1,1,1,0,0,0,1,1,1},
+		{1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,1,0,1,0,1,0,0,1},
+		{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+		{1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,1,0,1,0,1,0,0,1},
+		{1,1,0,0,0,0,0,1,1,1,0,0,0,1,1,1,1,1,1,0,0,0,1,1,1},
+		{1,1,0,0,0,0,0,1,1,1,0,0,0,1,1,1,1,1,1,0,0,0,1,1,1},
+		{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}};*/
+	double dir_x, plane_x;
+	ft_putnbr(key);
+	ft_putchar('\n');
+	if (key == 53)
+		exit(0);
+//	if (key == 126 || key == 125 || key == 123 || key == 124 || key == 49 || key == 36)
+//	{
+	if (key == GAUCHE)
+	{ 
+		bzero(ptr->img_data, W * H * 4);
+		dir_x = ptr->dir_x;
+		ptr->dir_x = ptr->dir_x * cos(0.2) - ptr->dir_y * sin(0.2);
+		ptr->dir_y = dir_x * sin(0.2) + ptr->dir_y * cos(0.2);
+		plane_x = ptr->plane_x;
+		ptr->plane_x = ptr->plane_x * cos(0.2) - ptr->plane_y * sin(0.2);
+		ptr->plane_y = plane_x * sin(0.2) + ptr->plane_y * cos(0.2);
+		raycast(ptr);
+	}
+	if (key == DROITE)
+	{ 
+		bzero(ptr->img_data, W * H * 4);
+		dir_x = ptr->dir_x;
+		ptr->dir_x = ptr->dir_x * cos(-0.2) - ptr->dir_y * sin(-0.2);
+		ptr->dir_y = dir_x * sin(-0.2) + ptr->dir_y * cos(-0.2);
+		plane_x = ptr->plane_x;
+		ptr->plane_x = ptr->plane_x * cos(-0.2) - ptr->plane_y * sin(-0.2);
+		ptr->plane_y = plane_x * sin(-0.2) + ptr->plane_y * cos(-0.2);
+		raycast(ptr);
+	}
+	if (key == HAUT)
+	{ 
+		ptr->y++;
+		bzero(ptr->img_data, W * H * 4);
+		if (ptr->tab[(int)(ptr->pos_x + ptr->dir_x * 0.1)][(int)(ptr->pos_y)] == 0)
+			ptr->pos_x += ptr->dir_x * 0.1;
+		if (ptr->tab[(int)(ptr->pos_x)][(int)(ptr->pos_y + ptr->dir_y * 0.1)] == 0)
+			ptr->pos_y += ptr->dir_y * 0.1;
+		raycast(ptr);
+	}
+	if (key == BAS)
+	{ 
+		ptr->y++;
+		bzero(ptr->img_data, W * H * 4);
+		if (ptr->tab[(int)(ptr->pos_x - ptr->dir_x * 0.1)][(int)(ptr->pos_y)] == 0)
+			ptr->pos_x -= ptr->dir_x * 0.1;
+		if (ptr->tab[(int)(ptr->pos_x)][(int)(ptr->pos_y - ptr->dir_y * 0.1)] == 0)
+			ptr->pos_y -= ptr->dir_y * 0.1;
+		raycast(ptr);
+	}
+	if (key == DEL)
+	{
+		bzero(ptr->img_data, W * H * 4);
+		ptr->dir_x = -1;
+		ptr->dir_y = 0;
+		ptr->plane_x = 0;
+		ptr->plane_y= 1;
+		ptr->y = 0;
+		raycast(ptr);
+	}
+	return (0);
 }
 
 int		main(int ac, char **av)
 {
-<<<<<<< HEAD
-	int bpp, size, endian;
-	(void)ac;
-	void *mlx = mlx_init();
-	void *win = mlx_new_window(mlx, 480, 240, "Wolf3D");
-	void *img = mlx_new_image(mlx, 480, 240);
-	int *data = (int *)mlx_get_data_addr(img, &bpp, &size, &endian);
-	raycast(data, mlx, win, img);
-	mlx_loop(mlx);
-=======
 	t_wolf ptr;
 	int bpp, size, endian;
 	(void)ac;
+	
+	ptr = read_file(av);
+	ptr.dir_x = -1;
+	ptr.dir_y = 0;
+	ptr.plane_x = 0;
+	ptr.plane_y= 1;
+	ptr.y = 0;
 	ptr.mlx = mlx_init();
-	ptr.win = mlx_new_window(ptr.mlx, 480, 240, "Wolf3D");
-	ptr.img = mlx_new_image(ptr.mlx, 480, 240);
+	ptr.win = mlx_new_window(ptr.mlx, W, H, "Wolf3D");
+	ptr.img = mlx_new_image(ptr.mlx, W, H);
 	ptr.img_data = (int *)mlx_get_data_addr(ptr.img, &bpp, &size, &endian);
 	raycast(&ptr);
+	mlx_hook(ptr.win, 2, 0, deal_key, &ptr);
 	mlx_loop(ptr.mlx);
->>>>>>> lloncham
 	return (0);
 }

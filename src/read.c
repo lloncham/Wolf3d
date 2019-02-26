@@ -6,11 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 14:47:42 by lloncham          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/02/26 14:42:57 by louali           ###   ########.fr       */
-=======
-/*   Updated: 2019/02/26 13:43:47 by lloncham         ###   ########.fr       */
->>>>>>> lloncham
+/*   Updated: 2019/02/27 00:29:23 by lisa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +106,7 @@ void	read_line(int fd, t_wolf *d)
 	contour(d) == 0 ? error("Pas de contours.") : 0;
 }
 
-int	**read_file(char **av)
+t_wolf	read_file(char **av)
 {
 	int		fd;
 	t_wolf	d;
@@ -122,9 +118,12 @@ int	**read_file(char **av)
 		error("nothing into the file");
 	read_line(fd, &d);
 	close(fd);
-<<<<<<< HEAD
-	return (d.tab);
-=======
 	return (d);
->>>>>>> lloncham
 }
+/*
+int		main(int ac, char **av)
+{
+	int	**tab;
+	tab = read_file(av);
+	return (0);
+}*/
