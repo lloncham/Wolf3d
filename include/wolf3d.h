@@ -71,5 +71,6 @@ typedef struct		s_wolf
 int		valid_char(char *str, t_wolf *r, int y);
 void	error(char *str);
 t_wolf	read_file(char **av);
+void	ft_put_pixel(int x, int y, int color, t_wolf *p);
 
 #endif

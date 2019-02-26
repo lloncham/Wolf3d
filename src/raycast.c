@@ -1,13 +1,4 @@
 #include "../include/wolf3d.h"
-
-void	put_pixel(int x, int y, int color, t_wolf *r)
-{
-	if (x < 0 || y < 0 || y >= H || x >= W)
-		return ;
-	printf("ok");
-	r->img_data[y * W + x] = color;
-}
-
 void	raycast(t_wolf *r)
 {	
 	int tab[25][25] =
@@ -114,7 +105,7 @@ void	raycast(t_wolf *r)
 			r->color = 0xf2f2f2;
 			if (r->side == 1)
 				r->color = 0xCCCCCC;
-			put_pixel(x, y, r->color, r);
+			ft_put_pixel(x, y, r->color, r);
 			y++;
 		}
 		x++;
