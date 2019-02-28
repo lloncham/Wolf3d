@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:43:48 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/27 00:29:35 by lisa             ###   ########.fr       */
+/*   Updated: 2019/02/28 15:46:33 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,11 @@ typedef struct		s_wolf
 	int				nbc;
 	int				nbl;
 	int				j;
-//	int				y_max;
 	double			start_x;
 	double			start_y;
 	double			pos_x;
 	double			pos_y;
+
 //raycasting
 	double			dir_x;
 	double			dir_y;
@@ -59,8 +59,8 @@ typedef struct		s_wolf
 	double			sidedist_y;
 	double			deltadist_x;
 	double			deltadist_y;
-	int			step_x;
-	int			step_y;
+	int				step_x;
+	int				step_y;
 	int				hit;
 	int				side;
 	double			perpwalldist;
@@ -70,15 +70,20 @@ typedef struct		s_wolf
 	int				y;
 	int				color;
 
-	double			time;
-	double			old_time;
+//textures
+	void			*text[3];
+	int				*text_data[3];
 }					t_wolf;
 
-t_wolf					read_file(char **av);
+int					ft_count_col(char *split);
+t_wolf				read_file(char **av);
 void				error(char *s);
 int					valid_char(char *s, t_wolf *r, int y);
-int		valid_char(char *str, t_wolf *r, int y);
-void	error(char *str);
-void	ft_put_pixel(int x, int y, int color, t_wolf *p);
+int					valid_char(char *str, t_wolf *r, int y);
+void				error(char *str);
+void				ft_put_pixel(int x, int y, int color, t_wolf *p);
+void				load_xpm(t_wolf *ptr, int bpp, int size, int endian);
+void				raycast(t_wolf *ptr);
+int					deal_key(int key, t_wolf *ptr);
 
 #endif

@@ -6,17 +6,17 @@
 #    By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/25 10:08:40 by lloncham          #+#    #+#              #
-#    Updated: 2019/02/26 13:32:19 by lloncham         ###   ########.fr        #
+#    Updated: 2019/02/28 15:21:07 by lloncham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_PATH = src
 
-SRC_NAME = main.c tools.c read.c
+SRC_NAME = main.c tools.c read.c raycast.c deal_key.c
 
 OBJ_PATH = obj
 
-CPPFLAGS = -Iinclude
+CPPFLAGS = -Iinclude -I
 
 LDFLAGS = -Llibft
 LDLIBS = -lft

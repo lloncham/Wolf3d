@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 13:49:27 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/26 13:40:04 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/02/28 15:33:31 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	error(char *str)
 
 int		clear_img(t_wolf *ptr)
 {
-//	bzero(ptr->img_data, ptr->size_w * ptr->size_h * 4);
+	bzero(ptr->img_data, W * H * 4);
 	return (0);
 }
 
@@ -49,4 +49,14 @@ int		valid_char(char *str, t_wolf *r, int y)
 		i++;
 	}
 	return (1);
+}
+
+int		ft_count_col(char *split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+		i++;
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 14:47:42 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/27 00:29:23 by lisa             ###   ########.fr       */
+/*   Updated: 2019/02/28 15:39:52 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,10 @@ int		count_line(int fd, char **av)
 	return (nbline);
 }
 
-int		ft_count_col(char *split)
+int		contour(t_wolf *map)
 {
-	int	i;
-
-	i = 0;
-	while (split[i])
-		i++;
-	return (i);
-}
-
-int			contour(t_wolf *map)
-{
-	int x;
-	int y;
+	int		x;
+	int		y;
 
 	x = 0;
 	y = 0;
@@ -110,7 +100,7 @@ t_wolf	read_file(char **av)
 {
 	int		fd;
 	t_wolf	d;
-	
+
 	if ((fd = open(av[1], O_RDONLY)) == -1)
 		error("Error");
 	d.nbl = count_line(fd, av);
@@ -120,10 +110,3 @@ t_wolf	read_file(char **av)
 	close(fd);
 	return (d);
 }
-/*
-int		main(int ac, char **av)
-{
-	int	**tab;
-	tab = read_file(av);
-	return (0);
-}*/
