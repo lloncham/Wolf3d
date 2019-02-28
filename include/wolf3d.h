@@ -71,6 +71,7 @@ typedef struct		s_wolf
 	int				color;
 
 //textures
+	int				t_size[3];
 	void			*text[3];
 	int				*text_data[3];
 }					t_wolf;

@@ -99,21 +99,21 @@ void	raycast(t_wolf *r)
 		y = r->draw_start;
 		while (y < r->draw_end)
 		{
-			r->color = r->text_data[0][(int)x + ((int)y * (4096 / 4))];
+			r->color = r->text_data[0][(int)x + ((int)y * (r->t_size[0] / 4))];
 			if (r->side == 1)
-				r->color = r->text_data[0][(int)x + (((int)y * (4096 / 4)))] & 0xB4B4B4;
+				r->color = r->text_data[0][(int)x + (((int)y * (r->t_size[0] / 4)))] & 0xB4B4B4;
 			ft_put_pixel((int)x, (int)y, r->color, r);
 			y++;
 		}
 		r->draw_end < 0 ? r->draw_end = H : r->draw_end;
 		y = r->draw_end;
+		//printf("OK");
 		while (y < H)
 		{
-		//	r->color = r->text_data2[(int)x + ((int)y * (1600 / 4))]; 
-		//	ft_put_pixel((int)x, (int)y, r->color, r);
-			ft_put_pixel(x, y, 0x006666, r);
-		//	r->color = r->text_data3[(int)x + ((int)y * (2504 / 4))]; 
-		//	ft_put_pixel(x, H - y - 1, r->color, r);
+			r->color = r->text_data[1][((int)x + (H - (int)y - 1) * (r->t_size[1] / 4))];
+			ft_put_pixel((int)x, (int)y, r->color, r);
+			r->color = r->text_data[2][(int)x + (H - (int)y - 1) * (r->t_size[2] / 4)]; 
+			ft_put_pixel(x, H - y - 1, r->color, r);
 			y++;
 		}
 		x++;
