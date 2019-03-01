@@ -19,7 +19,7 @@ OBJECTS = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME):
-	@gcc -Wall -Wextra -Werror -c $(SRC)
+	gcc -Wall -Wextra -Werror -c $(SRC)
 	@ar rc $(NAME) $(OBJECTS)
 
 clean:

@@ -12,15 +12,18 @@
 
 #include "../include/wolf3d.h"
 
-void	right_left(int key, t_wolf *ptr, double dir_x, double plane_x)
+void	right_left(int key, t_wolf *ptr)
 {
+	double dir_x;
+	double plane_x;
+
+	dir_x = ptr->dir_x;
+	plane_x = ptr->plane_x;
 	if (key == GAUCHE)
 	{
 		bzero(ptr->img_data, W * H * 4);
-		dir_x = ptr->dir_x;
 		ptr->dir_x = ptr->dir_x * cos(0.05) - ptr->dir_y * sin(0.05);
 		ptr->dir_y = dir_x * sin(0.05) + ptr->dir_y * cos(0.05);
-		plane_x = ptr->plane_x;
 		ptr->plane_x = ptr->plane_x * cos(0.05) - ptr->plane_y * sin(0.05);
 		ptr->plane_y = plane_x * sin(0.05) + ptr->plane_y * cos(0.05);
 		raycast(ptr);
@@ -28,17 +31,15 @@ void	right_left(int key, t_wolf *ptr, double dir_x, double plane_x)
 	if (key == DROITE)
 	{
 		bzero(ptr->img_data, W * H * 4);
-		dir_x = ptr->dir_x;
 		ptr->dir_x = ptr->dir_x * cos(-0.05) - ptr->dir_y * sin(-0.05);
 		ptr->dir_y = dir_x * sin(-0.05) + ptr->dir_y * cos(-0.05);
-		plane_x = ptr->plane_x;
 		ptr->plane_x = ptr->plane_x * cos(-0.05) - ptr->plane_y * sin(-0.05);
 		ptr->plane_y = plane_x * sin(-0.05) + ptr->plane_y * cos(-0.05);
 		raycast(ptr);
 	}
 }
 
-void	up_down(int key, t_wolf *ptr, double dir_x, double plane_x)
+void	up_down(int key, t_wolf *ptr)
 {
 	if (key == HAUT)
 	{
@@ -64,15 +65,14 @@ void	up_down(int key, t_wolf *ptr, double dir_x, double plane_x)
 
 int		deal_key(int key, t_wolf *ptr)
 {
-	double dir_x;
-	double plane_x;
-
 	ft_putnbr(key);
 	ft_putchar('\n');
+	if (key == 17)
+		ptr->textures = 1;
 	if (key == 53)
 		exit(0);
-	right_left(key, ptr, dir_x, plane_x);
-	up_down(key, ptr, dir_x, plane_x);
+	right_left(key, ptr);
+	up_down(key, ptr);
 	if (key == DEL)
 	{
 		bzero(ptr->img_data, W * H * 4);

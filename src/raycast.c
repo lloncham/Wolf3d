@@ -82,7 +82,7 @@ void	raycast(t_wolf *r)
 	y = 0;
 	if (r->y == 0)
 	{
-		r->pos_x = r->start_x;
+		r->pos_x = r->start_x; //pos de la camera
 		r->pos_y = r->start_y;
 	}
 	while (x <= W)
@@ -99,24 +99,26 @@ void	raycast(t_wolf *r)
 		y = r->draw_start;
 		while (y < r->draw_end)
 		{
-			r->color = r->text_data[0][(int)x + ((int)y * (r->t_size[0] / 4))];
+			choose_color(0xCCCCCC, r->text_data[0][(int)x + ((int)y * (r->t_size[0] / 4))], r);
 			if (r->side == 1)
-				r->color = r->text_data[0][(int)x + (((int)y * (r->t_size[0] / 4)))] & 0xB4B4B4;
+				choose_color(0xCCCCCC + 10, r->text_data[0][(int)x + (((int)y * (r->t_size[0] / 4)))] & 0xB4B4B4, r);
 			ft_put_pixel((int)x, (int)y, r->color, r);
 			y++;
 		}
 		r->draw_end < 0 ? r->draw_end = H : r->draw_end;
 		y = r->draw_end;
-		//printf("OK");
 		while (y < H)
 		{
-			r->color = r->text_data[1][((int)x + (H - (int)y - 1) * (r->t_size[1] / 4))];
+			choose_color(0xFFF, r->text_data[1][((int)x + (H - (int)y - 1) * (r->t_size[1] / 4))], r);
 			ft_put_pixel((int)x, (int)y, r->color, r);
-			r->color = r->text_data[2][(int)x + (H - (int)y - 1) * (r->t_size[2] / 4)]; 
+			choose_color(0xBB, r->text_data[2][(int)x + (H - (int)y - 1) * (r->t_size[2] / 4)], r);
 			ft_put_pixel(x, H - y - 1, r->color, r);
 			y++;
 		}
 		x++;
 	}
 	mlx_put_image_to_window(r->img_data, r->win, r->img, 0, 0);
+	//METTRE OMBRE SUR LA MAIN
+	mlx_put_image_to_window(r->img_data, r->win, r->text[3], -W/4, -H/9);
+
 }

@@ -10,20 +10,22 @@
 #                                                                              #
 # **************************************************************************** #
 
+NAME = wolf3d
+
 SRC_PATH = src
 
-SRC_NAME = main.c tools.c read.c raycast.c deal_key.c
+SRC_NAME = main.c tools.c read.c raycast.c deal_key.c color.c texture.c
 
 OBJ_PATH = obj
 
-CPPFLAGS = -Iinclude -I
+CPPFLAGS = include
 
-LDFLAGS = -Llibft
+LDFLAGS = -L./libft
 LDLIBS = -lft
+MLXFLAGS = -L./minilibx_macos
+MLXLIBS = -lmlx
 
-NAME = wolf3d
-
-CC = gcc
+CC = clang
 
 CFLAGS = -Werror -Wall -Wextra
 
@@ -32,18 +34,18 @@ OBJ_NAME = $(SRC_NAME:.c=.o)
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
-.SILENT:
+#.SILENT:
 
 all: $(NAME)
-
-$(OBJ) : $(SRC)
-	@mkdir -p $(OBJ_PATH) 2> /dev/null
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
 
 $(NAME): $(OBJ)
 		$(MAKE) -C libft
 		$(MAKE) -C minilibx_macos
-		$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@ -L./minilibx_macos -lmlx -framework OpenGL -framework AppKit
+		$(CC) -g -fsanitize=address $(LDFLAGS) $(LDLIBS) $^ -o $@ $(MLXFLAGS) $(MLXLIBS) -framework OpenGL -framework AppKit
+
+$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
+	@mkdir -p $(OBJ_PATH) 2> /dev/null
+	$(CC) $(CFLAGS) -I $(CPPFLAGS) -o $@ -c $<
 
 clean:
 	$(MAKE) -C libft clean

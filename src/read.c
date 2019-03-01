@@ -17,7 +17,6 @@ int		count_line(int fd, char **av)
 	int		i;
 	char	*line;
 	int		nbline;
-	int		ret;
 
 	nbline = 0;
 	i = 0;
