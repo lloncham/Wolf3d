@@ -6,7 +6,7 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 13:27:04 by louali            #+#    #+#             */
-/*   Updated: 2019/02/28 15:46:28 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/03 03:16:39 by lisa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	raycast(t_wolf *r)
 	y = 0;
 	if (r->y == 0)
 	{
-		r->pos_x = r->start_x;
-		r->pos_y = r->start_y;
+		r->pos_x = r->start_y;
+		r->pos_y = r->start_x;
 	}
 	while (x <= W)
 	{
@@ -99,9 +99,11 @@ void	raycast(t_wolf *r)
 		y = r->draw_start;
 		while (y < r->draw_end)
 		{
-			r->color = r->text_data[0][(int)x + ((int)y * (r->t_size[0] / 4))];
+		r->color = 0xf2f2f2;
+	//		r->color = r->text_data[0][(int)x + ((int)y * (r->t_size[0] / 4))];
 			if (r->side == 1)
-				r->color = r->text_data[0][(int)x + (((int)y * (r->t_size[0] / 4)))] & 0xB4B4B4;
+				r->color = 0xCCCCCC;
+//				r->color = r->text_data[0][(int)x + (((int)y * (r->t_size[0] / 4)))] & 0xB4B4B4;
 			ft_put_pixel((int)x, (int)y, r->color, r);
 			y++;
 		}
@@ -110,13 +112,16 @@ void	raycast(t_wolf *r)
 		//printf("OK");
 		while (y < H)
 		{
-			r->color = r->text_data[1][((int)x + (H - (int)y - 1) * (r->t_size[1] / 4))];
-			ft_put_pixel((int)x, (int)y, r->color, r);
-			r->color = r->text_data[2][(int)x + (H - (int)y - 1) * (r->t_size[2] / 4)]; 
-			ft_put_pixel(x, H - y - 1, r->color, r);
+		//	r->color = r->text_data[1][((int)x + (H - (int)y - 1) * (r->t_size[1] / 4))];
+			ft_put_pixel((int)x, (int)y, 3224369, r);
+	//		r->color = r->text_data[2][(int)x + (H - (int)y - 1) * (r->t_size[2] / 4)]; 
+			ft_put_pixel(x, H - y - 1, 3430794, r);
 			y++;
 		}
 		x++;
 	}
+	controls(*r);
+	menu(*r);
+	r->press[4] == 1 ? mini_map(*r) : 0;
 	mlx_put_image_to_window(r->img_data, r->win, r->img, 0, 0);
 }

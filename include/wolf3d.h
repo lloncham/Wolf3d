@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:43:48 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/28 15:46:33 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/03 13:35:47 by lisa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ typedef struct		s_wolf
 	void			*img;
 	void			*win;
 	int				*img_data;
+	int				press[5];
+	int				start;
 
 //tableau
 	int				**tab;
@@ -71,11 +73,12 @@ typedef struct		s_wolf
 	int				color;
 
 //textures
-	int				t_size[3];
-	void			*text[3];
-	int				*text_data[3];
+	int				t_size[5];
+	void			*text[5];
+	int				*text_data[5];
 }					t_wolf;
 
+void				controls(t_wolf r);
 int					ft_count_col(char *split);
 t_wolf				read_file(char **av);
 void				error(char *s);
@@ -85,6 +88,12 @@ void				error(char *str);
 void				ft_put_pixel(int x, int y, int color, t_wolf *p);
 void				load_xpm(t_wolf *ptr, int bpp, int size, int endian);
 void				raycast(t_wolf *ptr);
-int					deal_key(int key, t_wolf *ptr);
+int					deal_key(t_wolf *ptr);
+void				mini_map(t_wolf r);
+void				menu(t_wolf r);
+int					ft_close(t_wolf *param);
+int					press_key(int key, t_wolf *ptr);
+int					release_key(int key, t_wolf *ptr);
+void				start_screen(t_wolf r);
 
 #endif
