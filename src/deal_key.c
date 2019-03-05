@@ -24,6 +24,7 @@ int		press_key(int key, t_wolf *r)
 	key == BAS ? r->press[2] = 1 : 0;
 	key == HAUT ? r->press[3] = 1 : 0;
 	key == 4 ? r->press[4] = 1 : 0;
+	key == 17 ? r->textures = 1 : 0;
 	if (key == DEL && r->start == 1)
 	{
 		bzero(r->img_data, W * H * 4);
@@ -47,13 +48,15 @@ int		release_key(int key, t_wolf *r)
 	return (0);
 }
 
-void	right_left(t_wolf *ptr, double dir_x, double plane_x)
+void	right_left(t_wolf *ptr)
 {
+	double dir_x;
+	double plane_x;
+
+	plane_x = ptr->plane_x;
+	dir_x = ptr->dir_x;
 	if (ptr->press[0] == 1)
 	{
-		dir_x = ptr->dir_x;
-		plane_x = ptr->plane_x;
-		dir_x = ptr->dir_x;
 		ptr->dir_x = ptr->dir_x * cos(0.02) - ptr->dir_y * sin(0.02);
 		ptr->dir_y = dir_x * sin(0.02) + ptr->dir_y * cos(0.02);
 		plane_x = ptr->plane_x;
@@ -73,7 +76,7 @@ void	right_left(t_wolf *ptr, double dir_x, double plane_x)
 	}
 }
 
-void	up_down(t_wolf *ptr, double dir_x, double plane_x)
+void	up_down(t_wolf *ptr)
 {
 	if (ptr->press[3] == 1)
 	{
@@ -95,12 +98,10 @@ void	up_down(t_wolf *ptr, double dir_x, double plane_x)
 
 int		deal_key(t_wolf *ptr)
 {
-	double dir_x;
-	double plane_x;
 	if (ptr->start == 1)
 	{
-		right_left(ptr, dir_x, plane_x);
-		up_down(ptr, dir_x, plane_x);
+		right_left(ptr);
+		up_down(ptr);
 		bzero(ptr->img_data, W * H * 4);
 		raycast(ptr);
 	}

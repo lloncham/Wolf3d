@@ -29,6 +29,7 @@ void	load_xpm(t_wolf *ptr, int bpp, int size, int endian)
 	ptr->text_data[1] = (int *)mlx_get_data_addr(ptr->text[1], &bpp, &size, &endian);
 	ptr->t_size[1] = size;
 	ptr->text[0] = mlx_xpm_file_to_image(ptr->mlx, "../xpm/haie.XPM", &lar, &lon);
+	printf("lar %d,lon %d\n", lar, lon);
 	ptr->text_data[0] = (int *)mlx_get_data_addr(ptr->text[0], &bpp, &size, &endian);
 	ptr->t_size[0] = size;
 }

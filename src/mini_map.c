@@ -23,13 +23,13 @@ void		start_screen(t_wolf r)
 		x = 0;
 		while (x < 1180)
 		{
-			color = r.text_data[3][y + x * (r.t_size[3] / 4)];
+			color = r.text_data[3][x + y * (r.t_size[3] / 4)];
 			ft_put_pixel(x, y, color, &r);
 			x++;
 		}
 		y++;
 	}
-	mlx_put_image_to_window(r.img_data, r.win, r.img, 0, 0);
+	mlx_put_image_to_window(r.mlx, r.win, r.img, 0, 0);
 }
 
 void		controls(t_wolf r)

@@ -82,7 +82,7 @@ void	raycast(t_wolf *r)
 	y = 0;
 	if (r->y == 0)
 	{
-		r->pos_x = r->start_y;
+		r->pos_x = r->start_y; //position de depart
 		r->pos_y = r->start_x;
 	}
 	while (x <= W)
@@ -96,26 +96,38 @@ void	raycast(t_wolf *r)
 		r->draw_start < 0 ? r->draw_start = 0 : r->draw_start;
 		r->draw_end >= H ? r->draw_end = H - 1 : r->draw_end;
 //tracer la colonne!
+		double wall_x;
+		double text_x;
+		if (r->side == 1)
+			wall_x = r->raypos_x +((r->map_y - r->raypos_y + (1-r->step_y)/2)/r->raydir_y)*r->raydir_x;
+		else
+			wall_x=r->raypos_y+((r->map_x-r->raypos_x+(1-r->step_x)/2)/r->raydir_x)*r->raydir_y;
 		y = r->draw_start;
+		text_x = (int)(wall_x * r->t_size[0]/4);
+		if (r->side == 0 && r->raydir_x > 0)
+			text_x = r->t_size[0]/4 - text_x - 1;
+		if (r->side == 1 && r->raydir_y < 0)
+			text_x = r->t_size[0]/4 - text_x - 1;
 		while (y < r->draw_end)
 		{
-		r->color = 0xf2f2f2;
-	//		r->color = r->text_data[0][(int)x + ((int)y * (r->t_size[0] / 4))];
+		//A REVOIR, PB TEXTURES (LIGNE NOIRE + FONCER DANS LE MUR)
+			int d = y * 256 - H * 128 + r->hline * 128;
+			int texY = ((d * r->t_size[0]/4) / r->hline) / 256;
+			r->color = r->text_data[0][r->t_size[0]/4 * (int)texY + (int)text_x];
+			//choose_color(0xf2f2f2, r->text_data[0][(int)x + ((int)y * (r->t_size[0] / 4))], r);
 			if (r->side == 1)
-				r->color = 0xCCCCCC;
-//				r->color = r->text_data[0][(int)x + (((int)y * (r->t_size[0] / 4)))] & 0xB4B4B4;
+				choose_color(0xCCCCCC, r->text_data[0][(int)x + ((int)y * (r->t_size[0] / 4))], r);
 			ft_put_pixel((int)x, (int)y, r->color, r);
 			y++;
 		}
 		r->draw_end < 0 ? r->draw_end = H : r->draw_end;
 		y = r->draw_end;
-		//printf("OK");
 		while (y < H)
 		{
-		//	r->color = r->text_data[1][((int)x + (H - (int)y - 1) * (r->t_size[1] / 4))];
-			ft_put_pixel((int)x, (int)y, 3224369, r);
-	//		r->color = r->text_data[2][(int)x + (H - (int)y - 1) * (r->t_size[2] / 4)]; 
-			ft_put_pixel(x, H - y - 1, 3430794, r);
+			choose_color(3224369, r->text_data[1][((int)x + (H - (int)y) * (r->t_size[1] / 4))], r);
+			ft_put_pixel((int)x, (int)y, r->color, r);
+			choose_color(3224369, r->text_data[2][(int)x + (H - (int)y) * (r->t_size[2] / 4)], r);
+			ft_put_pixel(x, H - (int)y, r->color, r);
 			y++;
 		}
 		x++;

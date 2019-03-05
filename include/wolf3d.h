@@ -73,11 +73,13 @@ typedef struct		s_wolf
 	int				color;
 
 //textures
+	int				textures;
 	int				t_size[5];
 	void			*text[5];
 	int				*text_data[5];
 }					t_wolf;
 
+void				choose_color(int color, int texture, t_wolf *c);
 void				controls(t_wolf r);
 int					ft_count_col(char *split);
 t_wolf				read_file(char **av);

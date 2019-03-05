@@ -22,6 +22,7 @@ int		main(int ac, char **av)
 	if (ac != 2)
 		error("usage : [./wolf3d] [map]");
 	ptr = read_file(av);
+	ptr.textures = 0;
 	ptr.dir_x = -1;
 	ptr.press[0] = 0;
 	ptr.press[1] = 0;
