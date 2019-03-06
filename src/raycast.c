@@ -6,7 +6,7 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 13:27:04 by louali            #+#    #+#             */
-/*   Updated: 2019/03/06 02:46:29 by lisa             ###   ########.fr       */
+/*   Updated: 2019/03/06 15:49:43 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ void	init_raycast(t_wolf *r, double x)
 	r->raydir_y = r->dir_y + r->plane_y * r->camera_x;
 	r->map_x = (int)r->raypos_x;
 	r->map_y = (int)r->raypos_y;
-	r->deltadist_x = sqrt(1 + (r->raydir_y * r->raydir_y) / (r->raydir_x * r->raydir_x));
-	r->deltadist_y = sqrt(1 + (r->raydir_x * r->raydir_x) / (r->raydir_y * r->raydir_y));
+	r->deltadist_x = sqrt(1 + (r->raydir_y * r->raydir_y) / (r->raydir_x
+		* r->raydir_x));
+	r->deltadist_y = sqrt(1 + (r->raydir_x * r->raydir_x) / (r->raydir_y
+		* r->raydir_y));
 	r->hit = 0;
 }
 
 void	lon_rayon(t_wolf *r)
 {
-	//Connaitre orientation du mur touche et la longeur reelle du rayon!
 	if (r->raydir_x < 0)
 	{
 		r->step_x = -1;
@@ -66,164 +67,105 @@ void	lon_rayon(t_wolf *r)
 		if (r->tab[r->map_x][r->map_y] > 0)
 			r->hit = 1;
 	}
-	//distance corrigee!
 	if (r->side == 0)
-		r->perpwalldist = fabs((r->map_x - r->raypos_x + (1 - r->step_x) / 2) / r->raydir_x);
+		r->perpwalldist = fabs((r->map_x - r->raypos_x + (1 - r->step_x) / 2)
+			/ r->raydir_x);
 	else
-		r->perpwalldist = fabs((r->map_y - r->raypos_y + (1 - r->step_y) / 2) / r->raydir_y);
+		r->perpwalldist = fabs((r->map_y - r->raypos_y + (1 - r->step_y) / 2)
+			/ r->raydir_y);
 }
 
 void	raycast(t_wolf *r)
-{	
-	double x;
-	double y;
+{
+	double		x;
+	double		y;
 
 	x = 0;
 	y = 0;
 	if (r->y == 0)
 	{
-		r->pos_x = r->start_y; //position de depart
+		r->pos_x = r->start_y;
 		r->pos_y = r->start_x;
 	}
 	while (x <= W)
 	{
 		init_raycast(r, x);
 		lon_rayon(r);
-		//Hauteur de la colonne a tracer!
 		r->hline = abs((int)(H / r->perpwalldist));
 		r->draw_start = (int)(-r->hline / 2 + H / 2);
 		r->draw_end = (int)(r->hline / 2 + H / 2);
 		r->draw_start < 0 ? r->draw_start = 0 : r->draw_start;
 		r->draw_end >= H ? r->draw_end = H - 1 : r->draw_end;
-		//tracer la colonne!
-		int texNum = r->tab[r->map_x][r->map_y]-1;// trouve le chiffre de la case
-
-
-		double wallX;// la colonne exacte touchée transposée sur X
-
-		//  si le mur est orienté est/ouest (sur Y)
-		if (r->side==1) {
-			wallX=r->raypos_x+((r->map_y-r->raypos_y+(1-r->step_y)/2)/r->raydir_y)*r->raydir_x;
-		} else {
-			wallX=r->raypos_y+((r->map_x-r->raypos_x+(1-r->step_x)/2)/r->raydir_x)*r->raydir_y;
-		}
-
-		wallX -= floor((wallX));// arrondis à l’inférieur 
-
-		// coordonnée x de la colonne dans la texture
-		int texWidth = 512;
-		int texHeight = 512;
-		double texX = wallX * texWidth;
-		if (r->side == 0 && r->raydir_x > 0) {
-			texX = texWidth - texX - 1;
-		}
-		if (r->side == 1 && r->raydir_y < 0) {
-			texX = texWidth - texX - 1;
-		}
-
-		// trace la colonne
-		y=r->draw_start;
-		while (y<r->draw_end) {
-
-			double texY = (y * 2 - H + r->hline)* (texHeight/2)/r->hline;// coordonnée Y du texel 
-			r->color = r->text_data[0][r->t_size[0]/4 * (int)texY + (int)texX];
-//			int color = textures[texNum][(int)texX][(int)texY];// couleur du texel
-			if (r->side == 1) {
-				r->color = (r->color >>1) & 8355711;// assombrir la couleur
-			}
-			ft_put_pixel((int)x,(int)y,r->color, r);// trace le pixel
-			y++;
-
-		}
-		double floorXWall;
-		double floorYWall;
-
-		double weight;// coefficient de pondération
-double currentFloorX;// position du pixel sur X
-double currentFloorY;// position du pixel sur Y
-int floorTexX;// position du texel sur X
-int floorTexY;// position du texel sur Y
-double distWall = r->perpwalldist;// distance du mur
-double distPlayer = 0;// distance de la caméra
-double currentDist = 0;// point de départ de la texture
-
-//Le mur peut être orienté de 4 manières
-if (r->side == 0 && r->raydir_x > 0) {
-	// nord
-	floorXWall = r->map_x;
-	floorYWall = r->map_y + wallX;
-} else if (r->side == 0 && r->raydir_x < 0) {
-	// sud
-	floorXWall = r->map_x + 1.0;
-	floorYWall = r->map_y + wallX;
-} else if (r->side == 1 && r->raydir_y > 0) {
-	// est
-	floorXWall = r->map_x + wallX;
-	floorYWall = r->map_y;
-} else {
-	// ouest
-	floorXWall = r->map_x + wallX;
-	floorYWall = r->map_y + 1.0;
-}
-
-//trace le sol de drawEnd au bas de l'écran
-y=r->draw_end;
-while (y < H) {
-
-	currentDist=H/(2*y-H);// distance
-	weight=(currentDist-distPlayer)/(distWall-distPlayer);// coef
-	currentFloorX=weight*floorXWall+(1.0-weight)*r->pos_x;// position sur X
-	currentFloorY=weight*floorYWall+(1.0-weight)*r->pos_y;// position sur Y
-	floorTexX=(int)(currentFloorX*texWidth)%texWidth;// position texel sur X
-	floorTexY=(int)(currentFloorY*texHeight)%texHeight;// position texel sur Y
-
-//	try {
-		ft_put_pixel(x,y,r->text_data[1][r->t_size[1]/4 * floorTexY + floorTexX], r);// trace le sol
-		ft_put_pixel(x,H-y-1,r->text_data[2][r->t_size[2]/4 * floorTexY + floorTexX], r);// trace le sol
-//		screen.setPixel(x,H-y-1,textures[2][floorTexX][floorTexY]);// trace le plafond
-//	} catch (e:Error) {
-		// corrige le probleme de profondeur
-//	}
-	y++;
-}
-		x++;
-		/*		double wall_x;
-				double text_x;
-				if (r->side == 1)
-				wall_x = r->raypos_x +((r->map_y - r->raypos_y + (1-r->step_y)/2)/r->raydir_y)*r->raydir_x;
-				else
-				wall_x=r->raypos_y+((r->map_x-r->raypos_x+(1-r->step_x)/2)/r->raydir_x)*r->raydir_y;
-				y = r->draw_start;
-				text_x = (int)(wall_x * r->t_size[0]/4);
-				if (r->side == 0 && r->raydir_x > 0)
-				text_x = r->t_size[0]/4 - text_x - 1;
-				if (r->side == 1 && r->raydir_y < 0)
-				text_x = r->t_size[0]/4 - text_x - 1;
-				while (y < r->draw_end)
-				{
-		//A REVOIR, PB TEXTURES (LIGNE NOIRE + FONCER DANS LE MUR)
-		int d = y * 512 - H * 256 + r->hline * 256;
-		int texY = ((d * r->t_size[0]/4) / r->hline) / 512;
-		r->color = r->text_data[0][r->t_size[0]/4 * (int)texY + (int)text_x];
-		//choose_color(0xf2f2f2, r->text_data[0][(int)x + ((int)y * (r->t_size[0] / 4))], r);
+		r->texnum = r->tab[r->map_x][r->map_y] - 1;
 		if (r->side == 1)
-		r->color = r->text_data[0][r->t_size[0]/4 * (int)texY + (int)text_x];
-		//	choose_color(0xCCCCCC, r->text_data[0][(int)x + ((int)y * (r->t_size[0] / 4))], r);
-		ft_put_pixel((int)x, (int)y, r->color, r);
-		y++;
+			r->wall_x = r->raypos_x + ((r->map_y - r->raypos_y + (1 - r->step_y)
+				/ 2) / r->raydir_y) * r->raydir_x;
+		else
+			r->wall_x = r->raypos_y + ((r->map_x - r->raypos_x + (1 - r->step_x)
+				/ 2) / r->raydir_x) * r->raydir_y;
+		r->wall_x -= floor((r->wall_x));
+		r->texwidth = 512;
+		r->texheight = 512;
+		r->tex_x = r->wall_x * r->texwidth;
+		if (r->side == 0 && r->raydir_x > 0)
+			r->tex_x = r->texwidth - r->tex_x - 1;
+		if (r->side == 1 && r->raydir_y < 0)
+			r->tex_x = r->texwidth - r->tex_x - 1;
+		y = r->draw_start;
+		while (y < r->draw_end)
+		{
+			r->tex_y = (y * 2 - H + r->hline) * (r->texheight / 2) / r->hline;
+			r->color = r->text_data[0][r->t_size[0] / 4 * (int)r->tex_y
+				+ (int)r->tex_x];
+			if (r->side == 1)
+				r->color = (r->color >> 1) & 8355711;
+			ft_put_pixel((int)x, (int)y, r->color, r);
+			y++;
 		}
-		r->draw_end < 0 ? r->draw_end = H : r->draw_end;
+		r->distplayer = 0;
+		r->currentdist = 0;
+		r->distwall = r->perpwalldist;
+		if (r->side == 0 && r->raydir_x > 0)
+		{
+			r->floor_x_wall = r->map_x;
+			r->floor_y_wall = r->map_y + r->wall_x;
+		}
+		else if (r->side == 0 && r->raydir_x < 0)
+		{
+			r->floor_x_wall = r->map_x + 1.0;
+			r->floor_y_wall = r->map_y + r->wall_x;
+		}
+		else if (r->side == 1 && r->raydir_y > 0)
+		{
+			r->floor_x_wall = r->map_x + r->wall_x;
+			r->floor_y_wall = r->map_y;
+		}
+		else
+		{
+			r->floor_x_wall = r->map_x + r->wall_x;
+			r->floor_y_wall = r->map_y + 1.0;
+		}
 		y = r->draw_end;
 		while (y < H)
 		{
-		choose_color(3224369, r->text_data[1][((int)x + (H - (int)y) * (r->t_size[1] / 4))], r);
-		//		r->color = r->text_data[1][r->t_size[1]/4 * ( H - (int)y) + (int)x];
-		ft_put_pixel((int)x, (int)y, r->color, r);
-		choose_color(3224369, r->text_data[2][(int)x + (H - (int)y) * (r->t_size[2] / 4)], r);
-		ft_put_pixel(x, H - (int)y, r->color, r);
-		y++;
+			r->currentdist = H / (2 * y - H);
+			r->weight = (r->currentdist - r->distplayer) / (r->distwall
+				- r->distplayer);
+			r->currentfloor_x = r->weight * r->floor_x_wall + (1.0 - r->weight)
+				* r->pos_x;
+			r->currentfloor_y = r->weight * r->floor_y_wall + (1.0 - r->weight)
+				* r->pos_y;
+			r->floortex_x = (int)(r->currentfloor_x * r->texwidth)
+				% r->texwidth;
+			r->floortex_y = (int)(r->currentfloor_y * r->texheight)
+				% r->texheight;
+			ft_put_pixel(x, y, r->text_data[1][r->t_size[1] / 4 * r->floortex_y
+				+ r->floortex_x], r);
+			ft_put_pixel(x, H - y - 1, r->text_data[2][r->t_size[2] / 4
+				* r->floortex_y + r->floortex_x], r);
+			y++;
 		}
-		x++;*/
+		x++;
 	}
 	controls(*r);
 	menu(*r);

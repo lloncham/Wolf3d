@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:43:48 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/03 13:35:47 by lisa             ###   ########.fr       */
+/*   Updated: 2019/03/06 15:46:10 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,22 @@ typedef struct		s_wolf
 	int				t_size[5];
 	void			*text[5];
 	int				*text_data[5];
+	double			wall_x;
+	double			tex_x;
+	double			tex_y;
+	double			floor_x_wall;
+	double			floor_y_wall;
+	double			weight;
+	double			currentfloor_x;
+	double			currentfloor_y;
+	int				floortex_x;
+	int				floortex_y;
+	double			distwall;
+	double			distplayer;
+	double			currentdist;
+	int				texnum;
+	int				texwidth;
+	int				texheight;
 }					t_wolf;
 
 void				choose_color(int color, int texture, t_wolf *c);

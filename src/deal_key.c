@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 15:13:52 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/03 14:03:53 by lisa             ###   ########.fr       */
+/*   Updated: 2019/03/06 15:12:38 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,22 @@ void	up_down(t_wolf *ptr)
 	if (ptr->press[3] == 1)
 	{
 		ptr->y++;
-		if (ptr->tab[(int)(ptr->pos_x + ptr->dir_x * 0.02)][(int)(ptr->pos_y)] == 0)
-			ptr->pos_x += ptr->dir_x * 0.02;
-		if (ptr->tab[(int)(ptr->pos_x)][(int)(ptr->pos_y + ptr->dir_y * 0.02)] == 0)
-			ptr->pos_y += ptr->dir_y * 0.02;
+		if (ptr->tab[(int)(ptr->pos_x + ptr->dir_x * 0.05)][(int)(ptr->pos_y)]
+				== 0)
+			ptr->pos_x += ptr->dir_x * 0.05;
+		if (ptr->tab[(int)(ptr->pos_x)][(int)(ptr->pos_y + ptr->dir_y * 0.05)]
+				== 0)
+			ptr->pos_y += ptr->dir_y * 0.05;
 	}
 	if (ptr->press[2] == 1)
 	{
 		ptr->y++;
-		if (ptr->tab[(int)(ptr->pos_x - ptr->dir_x * 0.02)][(int)(ptr->pos_y)] == 0)
-			ptr->pos_x -= ptr->dir_x * 0.02;
-		if (ptr->tab[(int)(ptr->pos_x)][(int)(ptr->pos_y - ptr->dir_y * 0.02)] == 0)
-			ptr->pos_y -= ptr->dir_y * 0.02;
+		if (ptr->tab[(int)(ptr->pos_x - ptr->dir_x * 0.05)][(int)(ptr->pos_y)]
+				== 0)
+			ptr->pos_x -= ptr->dir_x * 0.05;
+		if (ptr->tab[(int)(ptr->pos_x)][(int)(ptr->pos_y - ptr->dir_y * 0.05)]
+				== 0)
+			ptr->pos_y -= ptr->dir_y * 0.05;
 	}
 }
 
@@ -107,12 +111,3 @@ int		deal_key(t_wolf *ptr)
 	}
 	return (0);
 }
-
-int		ft_close(t_wolf *param)
-{
-	(void)param;
-	exit(0);
-	return (1);
-}
-
-
