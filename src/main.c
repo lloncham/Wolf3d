@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 11:33:09 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/06 13:57:02 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/06 16:23:25 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		ft_close(t_wolf *param)
 
 void	var_init(t_wolf *ptr)
 {
+	ptr->texwidth = 512;
+	ptr->texheight = 512;
 	ptr->textures = 0;
 	ptr->dir_x = -1;
 	ptr->press[0] = 0;

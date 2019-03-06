@@ -6,36 +6,33 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:43:48 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/06 15:46:10 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/06 16:49:17 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WOLF3D_H
 # define WOLF3D_H
 
-#include "../libft/libft.h"
-#include "../minilibx_macos/mlx.h"
-#include <math.h> 
+# include "../libft/libft.h"
+# include "../minilibx_macos/mlx.h"
+# include <math.h>
 
-#define W 1180
-#define H 720
-#define GAUCHE 123
-#define DROITE 124
-#define HAUT 126
-#define BAS 125
-#define DEL 51
+# define W 1180
+# define H 720
+# define GAUCHE 123
+# define DROITE 124
+# define HAUT 126
+# define BAS 125
+# define DEL 51
 
 typedef struct		s_wolf
 {
-//fenetre
 	void			*mlx;
 	void			*img;
 	void			*win;
 	int				*img_data;
 	int				press[5];
 	int				start;
-
-//tableau
 	int				**tab;
 	int				nbc;
 	int				nbl;
@@ -44,8 +41,6 @@ typedef struct		s_wolf
 	double			start_y;
 	double			pos_x;
 	double			pos_y;
-
-//raycasting
 	double			dir_x;
 	double			dir_y;
 	double			plane_x;
@@ -71,8 +66,6 @@ typedef struct		s_wolf
 	int				draw_end;
 	int				y;
 	int				color;
-
-//textures
 	int				textures;
 	int				t_size[5];
 	void			*text[5];
@@ -113,5 +106,7 @@ int					ft_close(t_wolf *param);
 int					press_key(int key, t_wolf *ptr);
 int					release_key(int key, t_wolf *ptr);
 void				start_screen(t_wolf r);
+void				init_raycast(t_wolf *r, double x);
+void				ray(t_wolf *r);
 
 #endif

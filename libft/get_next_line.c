@@ -6,7 +6,7 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 10:53:19 by louali            #+#    #+#             */
-/*   Updated: 2019/02/07 17:46:49 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/06 16:50:55 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ static int		reading(const int fd, char **rest)
 	return (ret);
 }
 
-int		get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
-	int		ret;
+	int			ret;
 	static char	*rest[OPEN_MAX];
 
 	if (fd < 0)
