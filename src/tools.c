@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 13:49:27 by lloncham          #+#    #+#             */
-/*   Updated: 2019/02/28 15:33:31 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/07 10:25:25 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ void	error(char *str)
 
 int		clear_img(t_wolf *ptr)
 {
-	bzero(ptr->img_data, W * H * 4);
+	bzero(ptr->img_data, WEI * H * 4);
 	return (0);
 }
 
 void	ft_put_pixel(int x, int y, int color, t_wolf *p)
 {
-	if (x < 0 || y < 0 || x >= W || y >= H)
+	if (x < 0 || y < 0 || x >= WEI || y >= H)
 		return ;
-	p->img_data[y * W + x] = color;
+	p->img_data[y * WEI + x] = color;
 }
 
 int		valid_char(char *str, t_wolf *r, int y)

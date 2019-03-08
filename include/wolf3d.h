@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:43:48 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/06 16:49:17 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/08 12:12:15 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,29 @@
 # include "../minilibx_macos/mlx.h"
 # include <math.h>
 
-# define W 1180
+# define WEI 1180
 # define H 720
+# define W 13
+# define S 1
+# define A 0
+# define D 2
 # define GAUCHE 123
 # define DROITE 124
 # define HAUT 126
 # define BAS 125
 # define DEL 51
+# define ENTER 76
+# define SHIFT 257
+# define TEXTURE 17
 
 typedef struct		s_wolf
 {
+	int				colori;
 	void			*mlx;
 	void			*img;
 	void			*win;
 	int				*img_data;
-	int				press[5];
+	int				press[9];
 	int				start;
 	int				**tab;
 	int				nbc;
@@ -67,9 +75,9 @@ typedef struct		s_wolf
 	int				y;
 	int				color;
 	int				textures;
-	int				t_size[5];
-	void			*text[5];
-	int				*text_data[5];
+	int				t_size[6];
+	void			*text[6];
+	int				*text_data[6];
 	double			wall_x;
 	double			tex_x;
 	double			tex_y;
@@ -86,6 +94,8 @@ typedef struct		s_wolf
 	int				texnum;
 	int				texwidth;
 	int				texheight;
+	double			vit;
+	double			ang;
 }					t_wolf;
 
 void				choose_color(int color, int texture, t_wolf *c);
