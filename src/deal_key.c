@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 15:13:52 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/08 17:06:00 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/08 22:05:55 by lisa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		press_key(int key, t_wolf *r)
 	ft_putchar('\n');
 	if (key == 53)
 		exit(0);
-	key == ENTER ? r->start = 1 : 0;
+	key == ENTER || key == 36 ? r->start = 1 : 0;
 	key == GAUCHE ? r->press[0] = 1 : 0;
 	key == DROITE ? r->press[1] = 1 : 0;
 	key == BAS || key == S ? r->press[2] = 1 : 0;
@@ -85,22 +85,24 @@ void	right_left(t_wolf *ptr)
 
 void	up_down(t_wolf *ptr)
 {
-//	int i;
-
-//	i = 0;
 	if (ptr->press[5] == 1)
 	{
 		ptr->colori += 655621;
 		ptr->vit = 0.15;
 		ptr->ang = 0.05;
-//		system("afplay ../song/run.mp3&");
-//		i = 1;
+		if (ptr->i == 0)
+		{
+			ptr->i = 1;
+			system("afplay ../song/run.mp3&");
+		}
 	}
 	else
 	{
-//		if (i == 1)
-//			system("killall afplay");
-//		i = 0;
+		if (ptr->i == 1)
+		{
+			system("killall afplay");
+			ptr->i = 0;
+		}
 		ptr->ang = 0.02;
 		ptr->vit = 0.05;
 	}

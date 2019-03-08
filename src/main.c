@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 11:33:09 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/07 10:24:42 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/08 22:02:31 by lisa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	var_init(t_wolf *ptr)
 	ptr->plane_y = 1;
 	ptr->y = 0;
 	ptr->start = 0;
+	ptr->i = 0;
 }
 
 int		main(int ac, char **av)
