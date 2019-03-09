@@ -16,7 +16,7 @@ CC = clang
 
 SRC_PATH = src
 
-SRC_NAME = main.c tools.c read.c raycast.c deal_key.c mini_map.c texture.c
+SRC_NAME = main.c tools.c read.c raycast.c deal_key.c mini_map.c texture.c init_raycast.c menu.c
 
 OBJ_PATH = obj
 
