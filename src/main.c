@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 11:33:09 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/06 16:23:25 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/08 22:02:31 by lisa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		ft_close(t_wolf *param)
 
 void	var_init(t_wolf *ptr)
 {
+	ptr->press[6] = 0;
 	ptr->texwidth = 512;
 	ptr->texheight = 512;
 	ptr->textures = 0;
@@ -34,6 +35,7 @@ void	var_init(t_wolf *ptr)
 	ptr->plane_y = 1;
 	ptr->y = 0;
 	ptr->start = 0;
+	ptr->i = 0;
 }
 
 int		main(int ac, char **av)
@@ -48,8 +50,8 @@ int		main(int ac, char **av)
 	ptr = read_file(av);
 	var_init(&ptr);
 	ptr.mlx = mlx_init();
-	ptr.win = mlx_new_window(ptr.mlx, W, H, "Wolf3D");
-	ptr.img = mlx_new_image(ptr.mlx, W, H);
+	ptr.win = mlx_new_window(ptr.mlx, WEI, H, "Wolf3D");
+	ptr.img = mlx_new_image(ptr.mlx, WEI, H);
 	ptr.img_data = (int *)mlx_get_data_addr(ptr.img, &bpp, &size, &endian);
 	load_xpm(&ptr, bpp, size, endian);
 	start_screen(ptr);

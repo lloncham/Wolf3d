@@ -6,7 +6,7 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 16:43:05 by louali            #+#    #+#             */
-/*   Updated: 2019/03/06 16:46:45 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/07 11:43:06 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void	load_menu(t_wolf *ptr, int bpp, int size, int endian)
 	ptr->text_data[3] = (int *)mlx_get_data_addr(ptr->text[3], &bpp,
 			&size, &endian);
 	ptr->t_size[3] = size;
+	ptr->text[5] = mlx_xpm_file_to_image(ptr->mlx, "../xpm/bois.XPM",
+			&lar, &lon);
+	ptr->text_data[5] = (int *)mlx_get_data_addr(ptr->text[3], &bpp,
+			&size, &endian);
+	ptr->t_size[5] = size;
 }
 
 void	load_xpm(t_wolf *ptr, int bpp, int size, int endian)

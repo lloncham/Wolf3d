@@ -6,7 +6,7 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 13:27:04 by louali            #+#    #+#             */
-/*   Updated: 2019/03/06 16:41:10 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/08 16:19:26 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,22 @@ void	text_wall(t_wolf *r, double x, double y)
 	while (y < r->draw_end)
 	{
 		r->tex_y = (y * 2 - H + r->hline) * (r->texheight / 2) / r->hline;
-		r->color = r->text_data[0][r->t_size[0] / 4 * (int)r->tex_y
-			+ (int)r->tex_x];
+		if (r->press[6] % 2 == 1)
+//		{
+//			if (r->tab[(int)x][(int)y] == 1)
+				r->color = r->text_data[0][r->t_size[0] / 4 * (int)r->tex_y
+					+ (int)r->tex_x];
+//			else if (r->tab[(int)x][(int)y] == 2)
+//				r->color = r->text_data[5][r->t_size[5] / 4 * (int)r->tex_y
+//					+ (int)r->tex_x];
+//		}
+		else
+//		{
+//			if (r->tab[(int)x][(int)y] == 1)
+				r->color = 0xf2f2f2;
+//			else if (r->tab[(int)x][(int)y] == 2)
+//				r->color = 0;
+//		}
 		if (r->side == 1)
 			r->color = (r->color >> 1) & 8355711;
 		ft_put_pixel((int)x, (int)y, r->color, r);
@@ -49,10 +63,20 @@ void	text_floor(t_wolf *r, double x, double y)
 			% r->texwidth;
 		r->floortex_y = (int)(r->currentfloor_y * r->texheight)
 			% r->texheight;
-		ft_put_pixel(x, y, r->text_data[1][r->t_size[1] / 4 * r->floortex_y
-				+ r->floortex_x], r);
-		ft_put_pixel(x, H - y - 1, r->text_data[2][r->t_size[2] / 4
-				* r->floortex_y + r->floortex_x], r);
+		if (r->press[6] % 2 == 1)
+		{
+			ft_put_pixel(x, y, r->text_data[1][r->t_size[1] / 4 * r->floortex_y
+					+ r->floortex_x], r);
+			ft_put_pixel(x, H - y - 1, r->text_data[2][r->t_size[2] / 4
+					* r->floortex_y + r->floortex_x], r);
+		}
+		else
+		{
+			r->press[5] == 0 ? r->colori = 16724530 : 0;
+			ft_put_pixel(x, y, r->colori, r);
+			r->press[5] == 0 ? r->colori = 84561 : 0;
+			ft_put_pixel(x, H - y - 1, r->colori, r);
+		}
 		y++;
 	}
 }
@@ -96,7 +120,7 @@ void	raycast(t_wolf *r)
 		r->pos_x = r->start_y;
 		r->pos_y = r->start_x;
 	}
-	while (x <= W)
+	while (x <= WEI)
 	{
 		init_raycast(r, x);
 		text_wall(r, x, y);

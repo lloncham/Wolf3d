@@ -6,7 +6,7 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 16:36:58 by louali            #+#    #+#             */
-/*   Updated: 2019/03/06 16:41:32 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/07 10:24:30 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ray(t_wolf *r)
 
 void	init_raycast(t_wolf *r, double x)
 {
-	r->camera_x = (2 * x / W) - 1;
+	r->camera_x = (2 * x / WEI) - 1;
 	r->raypos_x = r->pos_x;
 	r->raypos_y = r->pos_y;
 	r->raydir_x = r->dir_x + r->plane_x * r->camera_x;
