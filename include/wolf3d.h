@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:43:48 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/08 12:12:15 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/11 11:44:54 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct		s_wolf
 	int				texheight;
 	double			vit;
 	double			ang;
+	int				i;
 }					t_wolf;
 
 void				choose_color(int color, int texture, t_wolf *c);

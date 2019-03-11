@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 15:13:52 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/08 22:05:55 by lisa             ###   ########.fr       */
+/*   Updated: 2019/03/11 12:08:41 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void	up_down(t_wolf *ptr)
 	if (ptr->press[5] == 1)
 	{
 		ptr->colori += 655621;
-		ptr->vit = 0.15;
-		ptr->ang = 0.05;
+		ptr->vit = 0.30;
+		ptr->ang = 0.10;
 		if (ptr->i == 0)
 		{
 			ptr->i = 1;
@@ -103,8 +103,8 @@ void	up_down(t_wolf *ptr)
 			system("killall afplay");
 			ptr->i = 0;
 		}
-		ptr->ang = 0.02;
-		ptr->vit = 0.05;
+		ptr->ang = 0.05;
+		ptr->vit = 0.15;
 	}
 	if (ptr->press[3] == 1)
 	{

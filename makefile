@@ -5,62 +5,38 @@
 #                                                     +:+ +:+         +:+      #
 #    By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/02/25 10:08:40 by lloncham          #+#    #+#              #
-#    Updated: 2019/02/28 15:21:07 by lloncham         ###   ########.fr        #
+#    Created: 2019/03/11 11:42:33 by lloncham          #+#    #+#              #
+#    Updated: 2019/03/11 11:46:08 by lloncham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = wolf3d
+NAME = wolf
 
-CC = clang
+CC = gcc
 
-SRC_PATH = src
+CFLAGS = -Wall -Wextra -Werror -I $(INDIR)
 
-SRC_NAME = main.c tools.c read.c raycast.c deal_key.c mini_map.c texture.c init_raycast.c menu.c
+SRC = src/deal_key.c src/read.c src/init_raycast.c src/main.c    src/raycast.c src/menu.c \
+	       src/mini_map.c src/texture.c src/tools.c
+OBJECT = $(SRC:.c=.o)
 
-OBJ_PATH = obj
-
-CPPFLAGS = -Iinclude
-
-LDFLAGS = -Llibft
-LDLIBS = -lft
-
-MLXFLAGS = -Lminilibx_macos
-MLXLIBS = -lmlx
-
-CFLAGS = -Werror -Wall -Wextra
-
-OBJ_NAME = $(SRC_NAME:.c=.o)
-
-SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
-OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
-
-.SILENT:
+INDIR = Includes
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-		$(MAKE) -C libft
-		$(MAKE) -C minilibx_macos
-		$(CC) $(LDFLAGS) $(LDLIBS) $^ -o $@ -L./minilibx_macos -lmlx -framework OpenGL -framework AppKit
+$(NAME) : $(OBJECT)
+	    cd libft ; $(MAKE) -f Makefile
+		    $(MAKE) -C minilibx_macos
+			    $(CC) -g -fsanitize=address -o $(NAME) $(CFLAGS) $(SRC) libft/libft.a -L /usr/local/lib/ -lmlx -framework OpenGL -framework AppKit
 
-$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
-	@mkdir -p $(OBJ_PATH) 2> /dev/null
-	$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
+clean :
+	    @cd libft ; $(MAKE) -f Makefile clean
 
-clean:
-	$(MAKE) -C libft clean
-	$(MAKE) -C minilibx_macos clean
-	rm -rf $(OBJ_PATH) 
 
-fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C libft fclean
+fclean : clean
+	    rm -f $(NAME)
+		    rm -f $(OBJECT)
 
-re: fclean all
+re : fclean all
 
-.PHONY: all, clean, fclean, re
-
-norme:
-	norminette $(SRC)
-	norminette $(INC_PATH)*.h
+.PHONY: all clean fclean
