@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 11:33:09 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/11 14:44:25 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/11 17:50:16 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		ft_close(t_wolf *param)
 
 void	var_init(t_wolf *ptr)
 {
-	ptr->press[6] = 0;
+	ptr->press[6] = 1;
 	ptr->texwidth = 512;
 	ptr->texheight = 512;
 	ptr->textures = 0;
@@ -35,8 +35,6 @@ void	var_init(t_wolf *ptr)
 	ptr->plane_y = 1;
 	ptr->y = 0;
 	ptr->start = 0;
-//	ptr->start_x = 0;
-//	ptr->start_y = 0;
 }
 
 int		main(int ac, char **av)

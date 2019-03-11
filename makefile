@@ -6,13 +6,13 @@
 #    By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/25 10:08:40 by lloncham          #+#    #+#              #
-#    Updated: 2019/03/11 12:33:45 by lloncham         ###   ########.fr        #
+#    Updated: 2019/03/11 17:52:44 by lloncham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = wolf3d
 
-CC = clang
+CC = clang #-g -fsanitize=address
 
 SRC_PATH = src
 

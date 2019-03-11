@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:43:48 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/11 14:40:04 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/11 17:45:23 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ typedef struct		s_wolf
 	int				y;
 	int				color;
 	int				textures;
-	int				t_size[6];
-	void			*text[6];
-	int				*text_data[6];
+	int				t_size[15];
+	void			*text[15];
+	int				*text_data[15];
 	double			wall_x;
 	double			tex_x;
 	double			tex_y;
