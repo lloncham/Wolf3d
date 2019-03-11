@@ -6,7 +6,7 @@
 /*   By: lisa <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:30:02 by lisa              #+#    #+#             */
-/*   Updated: 2019/03/08 17:17:21 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/10 15:22:03 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,26 @@ void		controls(t_wolf r)
 	}
 }
 
+void		carre2(t_wolf r, int x, int y, int color)
+{
+	int x2;
+	int y2;
+
+	x = (x + 2) * 10;
+	y = (y + 2) * 10;
+	x2 = x;
+	y2 = y;
+	while (y < y2 + 10)
+	{
+		x = x2;
+		while (x < x2 + 10)
+		{
+			ft_put_pixel(x, y, color, &r);
+			x++;
+		}
+		y++;
+	}
+}
 void		carre(t_wolf r, int x, int y, int color)
 {
 	int x2;
@@ -52,15 +72,13 @@ void		carre(t_wolf r, int x, int y, int color)
 		x = x2;
 		while (x < x2 + 10)
 		{
-//			if (r.tab[y][x] == 1)
-				color = r.text_data[3][(x + x2) + (y +y2) * (r.t_size[3] / 4)];
+			color = r.text_data[3][(x + x2) + (y +y2) * (r.t_size[3] / 4)];
 			ft_put_pixel(x, y, color, &r);
 			x++;
 		}
 		y++;
 	}
 }
-
 void		mini_map(t_wolf r)
 {
 	int		x;
@@ -72,22 +90,21 @@ void		mini_map(t_wolf r)
 		x = 0;
 		while (x < r.nbc)
 		{
-//			if (r.tab[y][x] == 1)
-				carre(r, x, y, r.text_data[3][x + y * (r.t_size[3] / 4)]);
-//			else
+			carre(r, x, y, r.text_data[3][x + y * (r.t_size[3] / 4)]);
 			x++;
 		}
 		y++;
 	}
+	y = 0;
 	while (y < r.nbl)
 	{
 		x = 0;
 		while (x < r.nbc)
 		{
 		if (r.tab[y][x] == 0)
-			carre(r, x, y, 8282937);
+			carre2(r, x, y, 8282937);
 		if (x == (int)r.pos_y && y == (int)r.pos_x)
-			carre(r, x, y, 3289800);
+			carre2(r, x, y, 3289800);
 		x++;
 		}
 	y++;
