@@ -6,7 +6,7 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 16:43:05 by louali            #+#    #+#             */
-/*   Updated: 2019/03/11 18:05:01 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/12 11:16:39 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	load_xpm(t_wolf *ptr, int bpp, int size, int endian)
 	int	lon;
 	int	lar;
 
-	ptr->text[6] = mlx_xpm_file_to_image(ptr->mlx, "xpm/mur6.xpm",
+	ptr->text[6] = mlx_xpm_file_to_image(ptr->mlx, "xpm/mur4.xpm",
 			&lar, &lon);
 	ptr->text_data[6] = (int *)mlx_get_data_addr(ptr->text[6], &bpp, &size,
 			&endian);
@@ -93,7 +93,7 @@ void	load_xpm(t_wolf *ptr, int bpp, int size, int endian)
 	ptr->text_data[7] = (int *)mlx_get_data_addr(ptr->text[7], &bpp, &size,
 			&endian);
 	ptr->t_size[7] = size;
-	ptr->text[8] = mlx_xpm_file_to_image(ptr->mlx, "xpm/mur6.xpm",
+	ptr->text[8] = mlx_xpm_file_to_image(ptr->mlx, "xpm/plafond.xpm",
 			&lar, &lon);
 	ptr->text_data[8] = (int *)mlx_get_data_addr(ptr->text[8], &bpp, &size,
 			&endian);
@@ -103,7 +103,7 @@ void	load_xpm(t_wolf *ptr, int bpp, int size, int endian)
 	ptr->text_data[2] = (int *)mlx_get_data_addr(ptr->text[2], &bpp, &size,
 			&endian);
 	ptr->t_size[2] = size;
-	ptr->text[1] = mlx_xpm_file_to_image(ptr->mlx, "xpm/sol5.xpm", &lar,
+	ptr->text[1] = mlx_xpm_file_to_image(ptr->mlx, "xpm/plafond6.xpm", &lar,
 			&lon);
 	ptr->text_data[1] = (int *)mlx_get_data_addr(ptr->text[1], &bpp, &size,
 			&endian);

@@ -6,7 +6,7 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 13:27:04 by louali            #+#    #+#             */
-/*   Updated: 2019/03/11 18:06:25 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/12 11:22:43 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,11 +140,8 @@ void	raycast(t_wolf *r)
 	{
 		init_raycast(r, x);
 		text_wall(r, x, y);
-		if (r->press[6] % 5 != 2)
-		{
-			side(r);
-			text_floor(r, x, y);
-		}
+		side(r);
+		text_floor(r, x, y);
 		x++;
 	}
 	controls(*r);
