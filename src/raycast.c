@@ -6,7 +6,7 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 13:27:04 by louali            #+#    #+#             */
-/*   Updated: 2019/03/12 11:22:43 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/12 14:49:49 by lisa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	text_wall(t_wolf *r, double x, double y)
 			r->color = 0xf2f2f2;
 		else if (r->press[6] % 5 == 3)
 			r->color = r->text_data[11][r->t_size[11] / 4 * (int)r->tex_y + (int)r->tex_x];
+		else if (r->press[6] % 5 == 0)
+			r->color = r->text_data[15][r->t_size[15] / 4 * (int)r->tex_y + (int)r->tex_x];
 		else if (r->press[6] % 5 == 4)
 			r->color = r->text_data[14][r->t_size[14] / 4 * (int)r->tex_y + (int)r->tex_x];
 		if (r->side == 1)
@@ -84,6 +86,13 @@ void	text_floor(t_wolf *r, double x, double y)
 			ft_put_pixel(x, y, r->text_data[2][r->t_size[2] / 4 * r->floortex_y
 					+ r->floortex_x], r);
 			ft_put_pixel(x, H - y - 1, r->text_data[11][r->t_size[11] / 4
+					* r->floortex_y + r->floortex_x], r);
+		}
+		if (r->press[6] % 5 == 0)
+		{
+			ft_put_pixel(x, y, r->text_data[16][r->t_size[16] / 4 * r->floortex_y
+					+ r->floortex_x], r);
+			ft_put_pixel(x, H - y - 1, r->text_data[2][r->t_size[2] / 4
 					* r->floortex_y + r->floortex_x], r);
 		}
 		if (r->press[6] % 5 == 4)

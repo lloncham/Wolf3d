@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 15:13:52 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/11 14:09:09 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/12 14:34:00 by lisa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		press_key(int key, t_wolf *r)
 	ft_putchar('\n');
 	if (key == 53)
 		exit(0);
-	key == ENTER ? r->start = 1 : 0;
+	key == ENTER || key == 36 ? r->start = 1 : 0;
 	key == GAUCHE ? r->press[0] = 1 : 0;
 	key == DROITE ? r->press[1] = 1 : 0;
 	key == BAS || key == S ? r->press[2] = 1 : 0;

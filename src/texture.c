@@ -6,7 +6,7 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 16:43:05 by louali            #+#    #+#             */
-/*   Updated: 2019/03/12 11:16:39 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/12 14:50:13 by lisa             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,16 @@ void	load_xpm(t_wolf *ptr, int bpp, int size, int endian)
 	ptr->text_data[0] = (int *)mlx_get_data_addr(ptr->text[0], &bpp, &size,
 			&endian);
 	ptr->t_size[0] = size;
+	ptr->text[15] = mlx_xpm_file_to_image(ptr->mlx, "xpm/mur7.xpm", &lar,
+			&lon);
+	ptr->text_data[15] = (int *)mlx_get_data_addr(ptr->text[15], &bpp, &size,
+			&endian);
+	ptr->t_size[15] = size;
+	ptr->text[16] = mlx_xpm_file_to_image(ptr->mlx, "xpm/sol1.xpm", &lar,
+			&lon);
+	ptr->text_data[16] = (int *)mlx_get_data_addr(ptr->text[16], &bpp, &size,
+			&endian);
+	ptr->t_size[16] = size;
 	load_menu(ptr, bpp, size, endian);
 	load_glace(ptr, bpp, size, endian);
 	load_feu(ptr, bpp, size, endian);
