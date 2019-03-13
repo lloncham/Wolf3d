@@ -24,7 +24,7 @@ void	start_screen(t_wolf r)
 		x = 0;
 		while (x < 1180)
 		{
-			color = r.text_data[3][x + y * (r.t_size[3] / 4)];
+			color = r.t_data[3][x + y * (r.t_size[3] / 4)];
 			ft_put_pixel(x, y, color, &r);
 			x++;
 		}
@@ -41,7 +41,7 @@ void	menu2(t_wolf r, int x, int y)
 	{
 		if (x < 10 || x > 1170)
 		{
-			color = r.text_data[3][x + y * (r.t_size[3] / 4)];
+			color = r.t_data[3][x + y * (r.t_size[3] / 4)];
 			ft_put_pixel(x, y, color, &r);
 		}
 		x++;
@@ -62,7 +62,7 @@ void	menu(t_wolf r)
 		{
 			while (x < 1180)
 			{
-				color = r.text_data[3][x + y * (r.t_size[3] / 4)];
+				color = r.t_data[3][x + y * (r.t_size[3] / 4)];
 				ft_put_pixel(x, y, color, &r);
 				x++;
 			}

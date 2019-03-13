@@ -12,6 +12,48 @@
 
 #include "wolf3d.h"
 
+int		press_key(int key, t_wolf *r)
+{
+	ft_putnbr(key);
+	ft_putchar('\n');
+	key == 53 ? exit(0) : 0;
+	key == ENTER || key == 36 ? r->start = 1 : 0;
+	key == GAUCHE ? r->press[0] = 1 : 0;
+	key == DROITE ? r->press[1] = 1 : 0;
+	key == BAS || key == S ? r->press[2] = 1 : 0;
+	key == HAUT || key == W ? r->press[3] = 1 : 0;
+	key == SHIFT ? r->press[5] = 1 : 0;
+	key == 4 ? r->press[4] = 1 : 0;
+	key == 17 ? r->textures = 1 : 0;
+	key == TEXTURE ? r->press[6]++ : 0;
+	key == A ? r->press[7] = 1 : 0;
+	key == D ? r->press[8] = 1 : 0;
+	if (key == DEL && r->start == 1)
+	{
+		bzero(r->img_data, WEI * H * 4);
+		r->dir_x = -1;
+		r->dir_y = 0;
+		r->plane_x = 0;
+		r->plane_y = 1;
+		r->y = 0;
+		raycast(r);
+	}
+	return (0);
+}
+
+int		release_key(int key, t_wolf *r)
+{
+	key == 4 ? r->press[4] = 0 : 0;
+	key == GAUCHE ? r->press[0] = 0 : 0;
+	key == SHIFT ? r->press[5] = 0 : 0;
+	key == DROITE ? r->press[1] = 0 : 0;
+	key == BAS || key == S ? r->press[2] = 0 : 0;
+	key == HAUT || key == W ? r->press[3] = 0 : 0;
+	key == A ? r->press[7] = 0 : 0;
+	key == D ? r->press[8] = 0 : 0;
+	return (0);
+}
+
 int		ft_close(t_wolf *param)
 {
 	(void)param;
@@ -52,7 +94,7 @@ int		main(int ac, char **av)
 	ptr.win = mlx_new_window(ptr.mlx, WEI, H, "Wolf3D");
 	ptr.img = mlx_new_image(ptr.mlx, WEI, H);
 	ptr.img_data = (int *)mlx_get_data_addr(ptr.img, &bpp, &size, &endian);
-	load_xpm(&ptr, bpp, size, endian);
+	load_xpm(&ptr, bpp, endian);
 	start_screen(ptr);
 	mlx_hook(ptr.win, 17, 0, ft_close, &ptr);
 	mlx_hook(ptr.win, 2, 0, press_key, &ptr);

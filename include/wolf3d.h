@@ -77,7 +77,7 @@ typedef struct		s_wolf
 	int				textures;
 	int				t_size[17];
 	void			*text[17];
-	int				*text_data[17];
+	int				*t_data[17];
 	double			wall_x;
 	double			tex_x;
 	double			tex_y;
@@ -86,8 +86,8 @@ typedef struct		s_wolf
 	double			weight;
 	double			currentfloor_x;
 	double			currentfloor_y;
-	int				floortex_x;
-	int				floortex_y;
+	int				ftex_x;
+	int				ftex_y;
 	double			distwall;
 	double			distplayer;
 	double			currentdist;
@@ -107,7 +107,7 @@ int					valid_char(char *s, t_wolf *r, int y);
 int					valid_char(char *str, t_wolf *r, int y);
 void				error(char *str);
 void				ft_put_pixel(int x, int y, int color, t_wolf *p);
-void				load_xpm(t_wolf *ptr, int bpp, int size, int endian);
+void				load_xpm(t_wolf *ptr, int bpp, int endian);
 void				raycast(t_wolf *ptr);
 int					deal_key(t_wolf *ptr);
 void				mini_map(t_wolf r);
@@ -118,5 +118,8 @@ int					release_key(int key, t_wolf *ptr);
 void				start_screen(t_wolf r);
 void				init_raycast(t_wolf *r, double x);
 void				ray(t_wolf *r);
+void				music(t_wolf *ptr);
+void				text_wall(t_wolf *r, double x, double y);
+void				text_floor(t_wolf *r, double x, double y);
 
 #endif

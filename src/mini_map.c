@@ -28,7 +28,7 @@ void		controls(t_wolf r)
 		x = 934;
 		while (x < 1169)
 		{
-			color = r.text_data[4][x2 + y2 * (r.t_size[4] / 4)];
+			color = r.t_data[4][x2 + y2 * (r.t_size[4] / 4)];
 			ft_put_pixel(x, y, color, &r);
 			x++;
 			x2++;
@@ -72,7 +72,7 @@ void		carre(t_wolf r, int x, int y, int color)
 		x = x2;
 		while (x < x2 + 10)
 		{
-			color = r.text_data[3][(x + x2) + (y +y2) * (r.t_size[3] / 4)];
+			color = r.t_data[3][(x + x2) + (y +y2) * (r.t_size[3] / 4)];
 			ft_put_pixel(x, y, color, &r);
 			x++;
 		}
@@ -84,29 +84,23 @@ void		mini_map(t_wolf r)
 	int		x;
 	int		y;
 
-	y = 0;
-	while (y < r.nbl)
+	y = -1;
+	while (++y < r.nbl)
 	{
-		x = 0;
-		while (x < r.nbc)
-		{
-			carre(r, x, y, r.text_data[3][x + y * (r.t_size[3] / 4)]);
-			x++;
-		}
-		y++;
+		x = -1;
+		while (++x < r.nbc)
+			carre(r, x, y, r.t_data[3][x + y * (r.t_size[3] / 4)]);
 	}
-	y = 0;
-	while (y < r.nbl)
+	y = -1;
+	while (++y < r.nbl)
 	{
-		x = 0;
-		while (x < r.nbc)
+		x = -1;
+		while (++x < r.nbc)
 		{
-		if (r.tab[y][x] == 0)
-			carre2(r, x, y, 8282937);
-		if (x == (int)r.pos_y && y == (int)r.pos_x)
-			carre2(r, x, y, 3289800);
-		x++;
+			if (r.tab[y][x] == 0)
+				carre2(r, x, y, 8282937);
+			if (x == (int)r.pos_y && y == (int)r.pos_x)
+				carre2(r, x, y, 3289800);
 		}
-	y++;
 	}
 }

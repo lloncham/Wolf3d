@@ -12,11 +12,11 @@
 
 NAME = wolf3d
 
-CC = clang #-g -fsanitize=address
+CC = clang -g -fsanitize=address
 
 SRC_PATH = src
 
-SRC_NAME = main.c tools.c read.c raycast.c deal_key.c mini_map.c texture.c init_raycast.c menu.c
+SRC_NAME = main.c tools.c read.c raycast.c deal_key.c mini_map.c texture.c init_raycast.c menu.c music.c text_wall_floor.c
 
 OBJ_PATH = obj
 
