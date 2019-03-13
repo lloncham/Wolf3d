@@ -12,7 +12,7 @@
 
 NAME = wolf3d
 
-CC = clang -g -fsanitize=address
+CC = clang # -g -fsanitize=address
 
 SRC_PATH = src
 

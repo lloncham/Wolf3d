@@ -16,7 +16,11 @@ int		press_key(int key, t_wolf *r)
 {
 	ft_putnbr(key);
 	ft_putchar('\n');
-	key == 53 ? exit(0) : 0;
+	if (key == 53)
+	{
+		system("killall afplay");
+		exit(0);
+	}
 	key == ENTER || key == 36 ? r->start = 1 : 0;
 	key == GAUCHE ? r->press[0] = 1 : 0;
 	key == DROITE ? r->press[1] = 1 : 0;
@@ -25,7 +29,11 @@ int		press_key(int key, t_wolf *r)
 	key == SHIFT ? r->press[5] = 1 : 0;
 	key == 4 ? r->press[4] = 1 : 0;
 	key == 17 ? r->textures = 1 : 0;
-	key == TEXTURE ? r->press[6]++ : 0;
+	if (key == TEXTURE) 
+	{
+		r->press[6]++;
+		basic_music(r);
+	}
 	key == A ? r->press[7] = 1 : 0;
 	key == D ? r->press[8] = 1 : 0;
 	if (key == DEL && r->start == 1)
@@ -98,6 +106,7 @@ int		main(int ac, char **av)
 	start_screen(ptr);
 	mlx_hook(ptr.win, 17, 0, ft_close, &ptr);
 	mlx_hook(ptr.win, 2, 0, press_key, &ptr);
+	system("afplay song/song4.mp3&");
 	mlx_hook(ptr.win, 3, 0, release_key, &ptr);
 	mlx_loop_hook(ptr.mlx, deal_key, &ptr);
 	mlx_loop(ptr.mlx);

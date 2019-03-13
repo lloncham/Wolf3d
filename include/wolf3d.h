@@ -121,5 +121,6 @@ void				ray(t_wolf *r);
 void				music(t_wolf *ptr);
 void				text_wall(t_wolf *r, double x, double y);
 void				text_floor(t_wolf *r, double x, double y);
+void				basic_music(t_wolf *ptr);
 
 #endif
