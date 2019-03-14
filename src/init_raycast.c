@@ -6,11 +6,29 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 16:36:58 by louali            #+#    #+#             */
-/*   Updated: 2019/03/11 14:40:00 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/14 13:51:14 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
+
+void	var_init(t_wolf *ptr)
+{
+	ptr->press[6] = 1;
+	ptr->texwidth = 512;
+	ptr->texheight = 512;
+	ptr->textures = 0;
+	ptr->dir_x = -1;
+	ptr->press[0] = 0;
+	ptr->press[1] = 0;
+	ptr->press[2] = 0;
+	ptr->press[3] = 0;
+	ptr->dir_y = 0;
+	ptr->plane_x = 0;
+	ptr->plane_y = 1;
+	ptr->y = 0;
+	ptr->start = 0;
+}
 
 void	ray2(t_wolf *r)
 {

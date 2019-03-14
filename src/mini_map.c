@@ -6,7 +6,7 @@
 /*   By: lisa <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:30:02 by lisa              #+#    #+#             */
-/*   Updated: 2019/03/11 13:45:21 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/14 15:23:14 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void		controls(t_wolf r)
 	int x2;
 	int y2;
 
-	y2 = 20;
+	y2 = 40;
 	y = 12;
-	while (y < 210)
+	while (y < 140)
 	{
 		x2 = 0;
-		x = 934;
+		x = 970;
 		while (x < 1169)
 		{
 			color = r.t_data[4][x2 + y2 * (r.t_size[4] / 4)];
@@ -58,6 +58,7 @@ void		carre2(t_wolf r, int x, int y, int color)
 		y++;
 	}
 }
+
 void		carre(t_wolf r, int x, int y, int color)
 {
 	int x2;
@@ -72,13 +73,14 @@ void		carre(t_wolf r, int x, int y, int color)
 		x = x2;
 		while (x < x2 + 10)
 		{
-			color = r.t_data[3][(x + x2) + (y +y2) * (r.t_size[3] / 4)];
+			color = r.t_data[3][(x + x2) + (y + y2) * (r.t_size[3] / 4)];
 			ft_put_pixel(x, y, color, &r);
 			x++;
 		}
 		y++;
 	}
 }
+
 void		mini_map(t_wolf r)
 {
 	int		x;

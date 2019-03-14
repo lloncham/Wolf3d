@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:43:48 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/12 14:46:10 by lisa             ###   ########.fr       */
+/*   Updated: 2019/03/14 17:02:19 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,14 @@ typedef struct		s_wolf
 	int				draw_start;
 	int				draw_end;
 	int				y;
-	int				color;
+	int				col;
 	int				textures;
 	int				t_size[17];
 	void			*text[17];
 	int				*t_data[17];
 	double			wall_x;
-	double			tex_x;
-	double			tex_y;
+	double			texx;
+	double			texy;
 	double			floor_x_wall;
 	double			floor_y_wall;
 	double			weight;
@@ -96,6 +96,8 @@ typedef struct		s_wolf
 	int				texheight;
 	double			vit;
 	double			ang;
+	double			px;
+	double			drx;
 }					t_wolf;
 
 void				choose_color(int color, int texture, t_wolf *c);
@@ -107,7 +109,7 @@ int					valid_char(char *s, t_wolf *r, int y);
 int					valid_char(char *str, t_wolf *r, int y);
 void				error(char *str);
 void				ft_put_pixel(int x, int y, int color, t_wolf *p);
-void				load_xpm(t_wolf *ptr, int bpp, int endian);
+void				load_textures(t_wolf *ptr, int bpp, int endian);
 void				raycast(t_wolf *ptr);
 int					deal_key(t_wolf *ptr);
 void				mini_map(t_wolf r);
@@ -122,5 +124,6 @@ void				music(t_wolf *ptr);
 void				text_wall(t_wolf *r, double x, double y);
 void				text_floor(t_wolf *r, double x, double y);
 void				basic_music(t_wolf *ptr);
-
+void				var_init(t_wolf *ptr);
+void				*ft_kill(void);
 #endif

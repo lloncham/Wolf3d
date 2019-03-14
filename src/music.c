@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   music.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/03/14 13:06:14 by louali            #+#    #+#             */
+/*   Updated: 2019/03/14 15:41:36 by louali           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "wolf3d.h"
 
 void	basic_music(t_wolf *ptr)
 {
-	system("killall afplay");
+	system("killall afplay 2&>/dev/null >/dev/null");
 	if (ptr->press[6] % 5 == 1)
 		system("afplay song/song4.mp3&");
 	else if (ptr->press[6] % 5 == 2)
@@ -26,7 +38,7 @@ void	music(t_wolf *ptr)
 		ptr->ang = 0.05;
 		if (i == 0)
 		{
-			system("killall afplay");
+			system("killall afplay 2&>/dev/null >/dev/null") ;
 			system("afplay song/run.mp3&");
 			i = 1;
 		}
@@ -35,7 +47,7 @@ void	music(t_wolf *ptr)
 	{
 		if (i == 1)
 		{
-			system("killall afplay");
+			system("killall afplay 2&>/dev/null >/dev/null");
 			basic_music(ptr);
 			i = 0;
 		}

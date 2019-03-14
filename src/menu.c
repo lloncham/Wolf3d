@@ -6,7 +6,7 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 14:03:11 by louali            #+#    #+#             */
-/*   Updated: 2019/03/11 13:42:26 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/14 12:55:56 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	start_screen(t_wolf r)
 		x = 0;
 		while (x < 1180)
 		{
-			color = r.t_data[3][x + y * (r.t_size[3] / 4)];
+			color = r.t_data[3][(x + 375) + (y + 250) * (r.t_size[3] / 4)];
 			ft_put_pixel(x, y, color, &r);
 			x++;
 		}
@@ -41,7 +41,7 @@ void	menu2(t_wolf r, int x, int y)
 	{
 		if (x < 10 || x > 1170)
 		{
-			color = r.t_data[3][x + y * (r.t_size[3] / 4)];
+			color = r.t_data[3][(x + 375) + (250 + y) * (r.t_size[3] / 4)];
 			ft_put_pixel(x, y, color, &r);
 		}
 		x++;
@@ -62,7 +62,7 @@ void	menu(t_wolf r)
 		{
 			while (x < 1180)
 			{
-				color = r.t_data[3][x + y * (r.t_size[3] / 4)];
+				color = r.t_data[3][(x + 375) + (y + 250) * (r.t_size[3] / 4)];
 				ft_put_pixel(x, y, color, &r);
 				x++;
 			}
