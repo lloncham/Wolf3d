@@ -88,10 +88,13 @@ void	a_d(t_wolf *ptr)
 	}
 }
 
-void	*ft_kill(void)
+void	ft_kill(int sign)
 {
-	system("killall afplay 2&>/dev/null >/dev/null");
-	exit (0);
+	if (sign == 2)
+	{
+		system("killall afplay 2&>/dev/null >/dev/null");
+		exit (0);
+	}
 }
 
 int		deal_key(t_wolf *ptr)

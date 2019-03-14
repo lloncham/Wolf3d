@@ -125,5 +125,5 @@ void				text_wall(t_wolf *r, double x, double y);
 void				text_floor(t_wolf *r, double x, double y);
 void				basic_music(t_wolf *ptr);
 void				var_init(t_wolf *ptr);
-void				*ft_kill(void);
+void				ft_kill(int sign);
 #endif

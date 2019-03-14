@@ -79,6 +79,7 @@ int		main(int ac, char **av)
 	int		size;
 	int		endian;
 
+	signal(SIGINT, ft_kill);
 	if (ac != 2)
 		error("usage : [./wolf3d] [map]");
 	ptr = read_file(av);
@@ -92,7 +93,6 @@ int		main(int ac, char **av)
 	mlx_hook(ptr.win, 17, 0, ft_close, &ptr);
 	mlx_hook(ptr.win, 2, 0, press_key, &ptr);
 	system("afplay song/song4.mp3&");
-	signal(2, ft_kill());
 	mlx_hook(ptr.win, 3, 0, release_key, &ptr);
 	mlx_loop_hook(ptr.mlx, deal_key, &ptr);
 	mlx_loop(ptr.mlx);
