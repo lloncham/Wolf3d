@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 14:47:42 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/15 12:05:32 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/15 14:00:51 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		count_line(int fd, char **av)
 
 	nbline = 0;
 	i = 0;
-	if ((fd = open(av[1], O_RDONLY)) == -1)
+	if ((fd = open(av[1], O_NOFOLLOW)) == -1)
 		return (0);
 	while (get_next_line(fd, &line))
 	{
@@ -101,7 +101,7 @@ t_wolf	read_file(char **av)
 	int		fd;
 	t_wolf	d;
 
-	if ((fd = open(av[1], O_RDONLY)) == -1)
+	if ((fd = open(av[1], O_NOFOLLOW)) == -1)
 		error("Error");
 	d.nbl = count_line(fd, av);
 	if (d.nbl <= 0)
