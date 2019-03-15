@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 14:47:42 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/15 14:00:51 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/15 15:26:17 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	read_line(int fd, t_wolf *d)
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (valid_char(line, d, j) == 0)
-			error("Unvalid char!");
+			error("Invalid char!");
 		if (j == 0)
 			d->nbc = ft_count_col(line);
 		if (!(d->tab[j] = (int *)malloc(sizeof(int) * d->nbc)))
@@ -92,8 +92,8 @@ void	read_line(int fd, t_wolf *d)
 		d->tab[j] = convert(d->tab, j, line, d->nbc);
 		j++;
 	}
-	d->j != 1 ? error("Mauvaise position.") : 0;
-	contour(d) == 0 ? error("Pas de contours.") : 0;
+	d->j != 1 ? error("Bad start pos.") : 0;
+	contour(d) == 0 ? error("Bad contours.") : 0;
 }
 
 t_wolf	read_file(char **av)
