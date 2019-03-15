@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 11:33:09 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/15 12:58:06 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/15 14:40:07 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,10 @@ int		ft_close(t_wolf *param)
 int		main(int ac, char **av)
 {
 	t_wolf	ptr;
-	int		bpp;
-	int		size;
-	int		endian;
 	int		i;
 
 	signal(SIGINT, ft_kill);
-	if (ac != 2)
-		error("usage : [./wolf3d] [map]");
+	ac != 2 ? error("usage : [./wolf3d] [map]") : 0;
 	i = ft_strlen(av[1]) - 1;
 	if (av[1][i] != 'd' && av[1][i - 1] != '3' && av[1][i - 2] != 'w')
 		error("Unvalid file!");
@@ -91,8 +87,9 @@ int		main(int ac, char **av)
 	ptr.mlx = mlx_init();
 	ptr.win = mlx_new_window(ptr.mlx, WEI, H, "Wolf3D");
 	ptr.img = mlx_new_image(ptr.mlx, WEI, H);
-	ptr.img_data = (int *)mlx_get_data_addr(ptr.img, &bpp, &size, &endian);
-	load_textures(&ptr, bpp, endian);
+	ptr.img_data = (int *)mlx_get_data_addr(ptr.img, &ptr.bpp, &ptr.size,
+			&ptr.endian);
+	load_textures(&ptr, ptr.bpp, ptr.endian);
 	start_screen(ptr);
 	mlx_hook(ptr.win, 17, 0, ft_close, &ptr);
 	mlx_hook(ptr.win, 2, 0, press_key, &ptr);

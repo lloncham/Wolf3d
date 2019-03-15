@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/28 15:13:52 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/14 17:02:22 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/15 14:26:10 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ft_kill(int sign)
 	if (sign == 2)
 	{
 		system("killall afplay 2&>/dev/null >/dev/null");
-		exit (0);
+		exit(0);
 	}
 }
 

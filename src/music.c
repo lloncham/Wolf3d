@@ -6,7 +6,7 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/14 13:06:14 by louali            #+#    #+#             */
-/*   Updated: 2019/03/14 15:41:36 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/15 14:26:30 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	music(t_wolf *ptr)
 		ptr->ang = 0.05;
 		if (i == 0)
 		{
-			system("killall afplay 2&>/dev/null >/dev/null") ;
+			system("killall afplay 2&>/dev/null >/dev/null");
 			system("afplay song/run.mp3&");
 			i = 1;
 		}

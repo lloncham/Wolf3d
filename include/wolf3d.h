@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:43:48 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/14 17:02:19 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/15 14:25:32 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@
 
 typedef struct		s_wolf
 {
+	int				bpp;
+	int				endian;
+	int				size;
 	int				colori;
 	void			*mlx;
 	void			*img;
