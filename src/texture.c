@@ -6,7 +6,7 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 16:43:05 by louali            #+#    #+#             */
-/*   Updated: 2019/03/14 15:17:41 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/15 13:52:39 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void	load_menu(t_wolf *ptr, int bpp, int endian)
 			&lar, &lon);
 	ptr->t_data[4] = (int *)mlx_get_data_addr(ptr->text[4], &bpp,
 			&ptr->t_size[4], &endian);
+	ptr->text[5] = mlx_xpm_file_to_image(ptr->mlx, "textures/fond.XPM",
+			&lar, &lon);
+	ptr->t_data[5] = (int *)mlx_get_data_addr(ptr->text[5], &bpp,
+			&ptr->t_size[5], &endian);
 	ptr->text[3] = mlx_xpm_file_to_image(ptr->mlx, "textures/acc.XPM",
 			&lar, &lon);
 	ptr->t_data[3] = (int *)mlx_get_data_addr(ptr->text[3], &bpp,

@@ -6,7 +6,7 @@
 /*   By: lisa <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/01 12:30:02 by lisa              #+#    #+#             */
-/*   Updated: 2019/03/14 15:23:14 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/15 13:53:49 by louali           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		carre(t_wolf r, int x, int y, int color)
 		x = x2;
 		while (x < x2 + 10)
 		{
-			color = r.t_data[3][(x + x2) + (y + y2) * (r.t_size[3] / 4)];
+			color = r.t_data[5][(x + x2) + (y + y2) * (r.t_size[5] / 4)];
 			ft_put_pixel(x, y, color, &r);
 			x++;
 		}
