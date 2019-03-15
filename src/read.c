@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 14:47:42 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/11 13:45:45 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/15 12:05:32 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ t_wolf	read_file(char **av)
 		error("Error");
 	d.nbl = count_line(fd, av);
 	if (d.nbl <= 0)
-		error("nothing into the file");
+		error("not a valid file!");
 	read_line(fd, &d);
 	if (close(fd) == -1)
 		error("error!");

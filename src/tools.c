@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 13:49:27 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/11 14:41:27 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/15 12:09:46 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		valid_char(char *str, t_wolf *r, int y)
 	i = 0;
 	while (str[i])
 	{
-		if (!ft_isdigit(str[i]) && str[i] != 'X')
+		if (str[i] != '1' && str[i] != '0' && str[i] != 'X')
 			return (0);
 		if (str[i] == 'X')
 		{
