@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 11:33:09 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/14 16:59:46 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/15 12:58:06 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,14 @@ int		main(int ac, char **av)
 	int		bpp;
 	int		size;
 	int		endian;
+	int		i;
 
 	signal(SIGINT, ft_kill);
 	if (ac != 2)
 		error("usage : [./wolf3d] [map]");
+	i = ft_strlen(av[1]) - 1;
+	if (av[1][i] != 'd' && av[1][i - 1] != '3' && av[1][i - 2] != 'w')
+		error("Unvalid file!");
 	ptr = read_file(av);
 	var_init(&ptr);
 	ptr.mlx = mlx_init();

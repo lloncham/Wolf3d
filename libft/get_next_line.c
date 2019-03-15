@@ -6,7 +6,7 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 10:53:19 by louali            #+#    #+#             */
-/*   Updated: 2019/03/06 16:50:55 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/15 13:41:02 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ static int		reading(const int fd, char **rest)
 
 	if (!(buf = (char *)malloc(sizeof(buf) * BUFF_SIZE + 1)))
 		return (-1);
-	while ((ret = read(fd, buf, BUFF_SIZE)) > 0)
+	while ((ret = read(fd, buf, BUFF_SIZE)))
 	{
+		if (ret == -1 || ret == 0)
+			return (0);
 		buf[ret] = '\0';
 		tmp = *rest;
 		*rest = ft_strjoin(*rest, buf);
