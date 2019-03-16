@@ -20,7 +20,7 @@ int		count_line(int fd, char **av)
 
 	nbline = 0;
 	i = 0;
-	if ((fd = open(av[1], O_NOFOLLOW)) == -1)
+	if ((fd = open(av[1], O_RDONLY | O_NOFOLLOW)) == -1)
 		return (0);
 	while (get_next_line(fd, &line))
 	{
@@ -28,7 +28,7 @@ int		count_line(int fd, char **av)
 		free(line);
 	}
 	if (close(fd) == -1)
-		error("error!");
+		return (0);
 	return (nbline);
 }
 
@@ -67,7 +67,7 @@ int		*convert(int **tab, int j, char *split, int nbcol)
 		i++;
 	}
 	if (i != nbcol)
-		error("wrong number of column");
+		return (NULL);
 	free(split);
 	return (tab[j]);
 }
@@ -84,16 +84,17 @@ void	read_line(int fd, t_wolf *d)
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (valid_char(line, d, j) == 0)
-			error("Invalid char!");
+			error("Invalid char!", d);
 		if (j == 0)
 			d->nbc = ft_count_col(line);
 		if (!(d->tab[j] = (int *)malloc(sizeof(int) * d->nbc)))
 			return ;
-		d->tab[j] = convert(d->tab, j, line, d->nbc);
+		if ((d->tab[j] = convert(d->tab, j, line, d->nbc)) == NULL)
+			error("wrong number of colomn!", d);
 		j++;
 	}
-	d->j != 1 ? error("Bad start pos.") : 0;
-	contour(d) == 0 ? error("Bad contours.") : 0;
+	d->j != 1 ? error("Bad start pos.", d) : 0;
+	contour(d) == 0 ? error("Bad contours.", d) : 0;
 }
 
 t_wolf	read_file(char **av)
@@ -101,13 +102,14 @@ t_wolf	read_file(char **av)
 	int		fd;
 	t_wolf	d;
 
-	if ((fd = open(av[1], O_NOFOLLOW)) == -1)
-		error("Error");
-	d.nbl = count_line(fd, av);
+	if ((fd = open(av[1], O_RDONLY | O_NOFOLLOW)) == -1)
+		error("Error", &d);
+	if ((d.nbl = count_line(fd, av)) == 0)
+		error("error!", &d);
 	if (d.nbl <= 0)
-		error("not a valid file!");
+		error("not a valid file!", &d);
 	read_line(fd, &d);
 	if (close(fd) == -1)
-		error("error!");
+		error("error!", &d);
 	return (d);
 }

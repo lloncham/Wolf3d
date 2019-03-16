@@ -107,10 +107,8 @@ void				choose_color(int color, int texture, t_wolf *c);
 void				controls(t_wolf r);
 int					ft_count_col(char *split);
 t_wolf				read_file(char **av);
-void				error(char *s);
 int					valid_char(char *s, t_wolf *r, int y);
-int					valid_char(char *str, t_wolf *r, int y);
-void				error(char *str);
+void				error(char *str, t_wolf *w);
 void				ft_put_pixel(int x, int y, int color, t_wolf *p);
 void				load_textures(t_wolf *ptr, int bpp, int endian);
 void				raycast(t_wolf *ptr);
@@ -129,4 +127,6 @@ void				text_floor(t_wolf *r, double x, double y);
 void				basic_music(t_wolf *ptr);
 void				var_init(t_wolf *ptr);
 void				ft_kill(int sign);
+void				free_tab(t_wolf *f);
+
 #endif

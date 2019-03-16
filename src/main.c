@@ -31,6 +31,8 @@ int		press_key(int key, t_wolf *r)
 	if (key == 53)
 	{
 		system("killall afplay 2&>/dev/null >/dev/null");
+		free_tab(r);
+		mlx_destroy_window(r->mlx, r->win);
 		exit(0);
 	}
 	key == ENTER || key == 36 ? r->start = 1 : 0;
@@ -67,7 +69,8 @@ int		release_key(int key, t_wolf *r)
 
 int		ft_close(t_wolf *param)
 {
-	(void)param;
+	mlx_destroy_window(param->mlx, param->win);
+	free_tab(param);
 	exit(0);
 	return (1);
 }
@@ -78,17 +81,17 @@ int		main(int ac, char **av)
 	int		i;
 
 	signal(SIGINT, ft_kill);
-	ac != 2 ? error("usage : [./wolf3d] [map]") : 0;
+	ac != 2 ? error("usage : [./wolf3d] [map]", &ptr) : 0;
 	i = ft_strlen(av[1]) - 1;
 	if (av[1][i] != 'd' && av[1][i - 1] != '3' && av[1][i - 2] != 'w')
-		error("Invalid file!");
+		error("Invalid file!", &ptr);
 	ptr = read_file(av);
 	var_init(&ptr);
 	ptr.mlx = mlx_init();
 	ptr.win = mlx_new_window(ptr.mlx, WEI, H, "Wolf3D");
 	ptr.img = mlx_new_image(ptr.mlx, WEI, H);
 	ptr.img_data = (int *)mlx_get_data_addr(ptr.img, &ptr.bpp, &ptr.size,
-			&ptr.endian);
+		&ptr.endian);
 	load_textures(&ptr, ptr.bpp, ptr.endian);
 	start_screen(ptr);
 	mlx_hook(ptr.win, 17, 0, ft_close, &ptr);

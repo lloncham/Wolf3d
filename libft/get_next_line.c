@@ -64,7 +64,10 @@ static int		reading(const int fd, char **rest)
 	while ((ret = read(fd, buf, BUFF_SIZE)))
 	{
 		if (ret == -1 || ret == 0)
+		{
+			free(buf);
 			return (0);
+		}
 		buf[ret] = '\0';
 		tmp = *rest;
 		*rest = ft_strjoin(*rest, buf);

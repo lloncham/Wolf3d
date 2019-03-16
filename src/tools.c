@@ -12,9 +12,10 @@
 
 #include "wolf3d.h"
 
-void	error(char *str)
+void	error(char *str, t_wolf *w)
 {
 	ft_putendl(str);
+	free_tab(w);
 	exit(0);
 }
 
@@ -59,4 +60,16 @@ int		ft_count_col(char *split)
 	while (split[i])
 		i++;
 	return (i);
+}
+
+void	free_tab(t_wolf *f)
+{
+	int i;
+
+	i = 0;
+	if (!f->tab)
+		return ;
+	while (++i < f->nbl)
+		free(f->tab[i]);
+	free(f->tab);
 }
