@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:43:48 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/15 14:25:32 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/18 14:31:56 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@
 
 typedef struct		s_wolf
 {
+	void			*text[17];
+	void			*mlx;
+	void			*img;
+	void			*win;
 	int				bpp;
 	int				endian;
 	int				size;
 	int				colori;
-	void			*mlx;
-	void			*img;
-	void			*win;
 	int				*img_data;
 	int				press[9];
 	int				start;
@@ -48,6 +49,30 @@ typedef struct		s_wolf
 	int				nbc;
 	int				nbl;
 	int				j;
+	int				map_x;
+	int				map_y;
+	int				step_x;
+	int				step_y;
+	int				hit;
+	int				side;
+	int				hline;
+	int				draw_start;
+	int				draw_end;
+	int				y;
+	int				col;
+	int				textures;
+	int				t_size[17];
+	int				*t_data[17];
+	int				ftex_x;
+	int				ftex_y;
+	int				texnum;
+	int				texwidth;
+	int				texheight;
+	double			perpwalldist;
+	double			vit;
+	double			ang;
+	double			px;
+	double			drx;
 	double			start_x;
 	double			start_y;
 	double			pos_x;
@@ -61,26 +86,9 @@ typedef struct		s_wolf
 	double			raypos_y;
 	double			raydir_x;
 	double			raydir_y;
-	int				map_x;
-	int				map_y;
-	double			sidedist_x;
-	double			sidedist_y;
-	double			deltadist_x;
-	double			deltadist_y;
-	int				step_x;
-	int				step_y;
-	int				hit;
-	int				side;
-	double			perpwalldist;
-	int				hline;
-	int				draw_start;
-	int				draw_end;
-	int				y;
-	int				col;
-	int				textures;
-	int				t_size[17];
-	void			*text[17];
-	int				*t_data[17];
+	double			distwall;
+	double			distplayer;
+	double			currentdist;
 	double			wall_x;
 	double			texx;
 	double			texy;
@@ -89,35 +97,13 @@ typedef struct		s_wolf
 	double			weight;
 	double			currentfloor_x;
 	double			currentfloor_y;
-	int				ftex_x;
-	int				ftex_y;
-	double			distwall;
-	double			distplayer;
-	double			currentdist;
-	int				texnum;
-	int				texwidth;
-	int				texheight;
-	double			vit;
-	double			ang;
-	double			px;
-	double			drx;
+	double			sidedist_x;
+	double			sidedist_y;
+	double			deltadist_x;
+	double			deltadist_y;
+
 }					t_wolf;
 
-void				choose_color(int color, int texture, t_wolf *c);
-void				controls(t_wolf r);
-int					ft_count_col(char *split);
-t_wolf				read_file(char **av);
-int					valid_char(char *s, t_wolf *r, int y);
-void				error(char *str, t_wolf *w);
-void				ft_put_pixel(int x, int y, int color, t_wolf *p);
-void				load_textures(t_wolf *ptr, int bpp, int endian);
-void				raycast(t_wolf *ptr);
-int					deal_key(t_wolf *ptr);
-void				mini_map(t_wolf r);
-void				menu(t_wolf r);
-int					ft_close(t_wolf *param);
-int					press_key(int key, t_wolf *ptr);
-int					release_key(int key, t_wolf *ptr);
 void				start_screen(t_wolf r);
 void				init_raycast(t_wolf *r, double x);
 void				ray(t_wolf *r);
@@ -128,5 +114,20 @@ void				basic_music(t_wolf *ptr);
 void				var_init(t_wolf *ptr);
 void				ft_kill(int sign);
 void				free_tab(t_wolf *f);
+void				choose_color(int color, int texture, t_wolf *c);
+void				controls(t_wolf r);
+void				error(char *str, t_wolf *w);
+void				ft_put_pixel(int x, int y, int color, t_wolf *p);
+void				load_textures(t_wolf *ptr, int bpp, int endian);
+void				raycast(t_wolf *ptr);
+void				mini_map(t_wolf r);
+void				menu(t_wolf r);
+int					ft_count_col(char *split);
+int					valid_char(char *s, t_wolf *r, int y);
+int					deal_key(t_wolf *ptr);
+int					ft_close(t_wolf *param);
+int					press_key(int key, t_wolf *ptr);
+int					release_key(int key, t_wolf *ptr);
+t_wolf				read_file(char **av);
 
 #endif
