@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 13:49:27 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/15 12:47:55 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/18 14:40:19 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@ void	error(char *str, t_wolf *w)
 	ft_putendl(str);
 	free_tab(w);
 	exit(0);
-}
-
-int		clear_img(t_wolf *ptr)
-{
-	bzero(ptr->img_data, WEI * H * 4);
-	return (0);
 }
 
 void	ft_put_pixel(int x, int y, int color, t_wolf *p)

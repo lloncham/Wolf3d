@@ -6,7 +6,7 @@
 /*   By: louali <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 16:36:58 by louali            #+#    #+#             */
-/*   Updated: 2019/03/14 13:51:14 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/25 14:35:34 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	var_init(t_wolf *ptr)
 	ptr->texwidth = 512;
 	ptr->texheight = 512;
 	ptr->textures = 0;
-	ptr->dir_x = -1;
+	ptr->dir_x = -0.999999;
 	ptr->press[0] = 0;
 	ptr->press[1] = 0;
 	ptr->press[2] = 0;
@@ -97,7 +97,7 @@ void	init_raycast(t_wolf *r, double x)
 				* r->raydir_y));
 	r->hit = 0;
 	ray(r);
-	r->hline = abs((int)(H / r->perpwalldist));
+	r->hline = ft_abs((int)(H / r->perpwalldist));
 	r->draw_start = (int)(-r->hline / 2 + H / 2);
 	r->draw_end = (int)(r->hline / 2 + H / 2);
 	r->draw_start < 0 ? r->draw_start = 0 : r->draw_start;
