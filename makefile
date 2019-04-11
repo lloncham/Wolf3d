@@ -6,7 +6,7 @@
 #    By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/25 10:08:40 by lloncham          #+#    #+#              #
-#    Updated: 2019/03/14 15:50:21 by louali           ###   ########.fr        #
+#    Updated: 2019/04/04 15:13:16 by lloncham         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ LDLIBS = -lft
 MLXFLAGS = -Lminilibx_macos
 MLXLIBS = -lmlx
 
-CFLAGS = -Werror -Wall -Wextra
+CFLAGS = -Werror -Wall -Wextra -g
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

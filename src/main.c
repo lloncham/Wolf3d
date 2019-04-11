@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 11:33:09 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/15 15:26:31 by louali           ###   ########.fr       */
+/*   Updated: 2019/03/25 15:52:04 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int		ft_close(t_wolf *param)
 	mlx_destroy_window(param->mlx, param->win);
 	free_tab(param);
 	exit(0);
-	return (1);
 }
 
 int		main(int ac, char **av)
@@ -87,7 +86,8 @@ int		main(int ac, char **av)
 		error("Invalid file!", &ptr);
 	ptr = read_file(av);
 	var_init(&ptr);
-	ptr.mlx = mlx_init();
+	if ((ptr.mlx = mlx_init()) == NULL)
+		error("mlx didn't init", &ptr);
 	ptr.win = mlx_new_window(ptr.mlx, WEI, H, "Wolf3D");
 	ptr.img = mlx_new_image(ptr.mlx, WEI, H);
 	ptr.img_data = (int *)mlx_get_data_addr(ptr.img, &ptr.bpp, &ptr.size,

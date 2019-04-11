@@ -6,7 +6,7 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 10:43:48 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/18 14:41:40 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/25 15:44:53 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void				ft_kill(int sign);
 void				free_tab(t_wolf *f);
 void				choose_color(int color, int texture, t_wolf *c);
 void				controls(t_wolf r);
-void				error(char *str, t_wolf *w);
+void				error(char *str, t_wolf *r);
 void				ft_put_pixel(int x, int y, int color, t_wolf *p);
 void				load_textures(t_wolf *ptr, int bpp, int endian);
 void				raycast(t_wolf *ptr);

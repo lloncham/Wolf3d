@@ -6,16 +6,16 @@
 /*   By: lloncham <lloncham@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/25 13:49:27 by lloncham          #+#    #+#             */
-/*   Updated: 2019/03/18 14:40:19 by lloncham         ###   ########.fr       */
+/*   Updated: 2019/03/25 15:46:23 by lloncham         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-void	error(char *str, t_wolf *w)
+void	error(char *str, t_wolf *r)
 {
 	ft_putendl(str);
-	free_tab(w);
+	free_tab(r);
 	exit(0);
 }
 
@@ -60,10 +60,10 @@ void	free_tab(t_wolf *f)
 {
 	int i;
 
-	i = 0;
+	i = -1;
 	if (!f->tab)
 		return ;
-	while (++i < f->nbl)
+	while (++i < f->nbl && f->tab[i])
 		free(f->tab[i]);
 	free(f->tab);
 }

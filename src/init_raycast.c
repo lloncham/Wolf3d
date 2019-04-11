@@ -18,7 +18,7 @@ void	var_init(t_wolf *ptr)
 	ptr->texwidth = 512;
 	ptr->texheight = 512;
 	ptr->textures = 0;
-	ptr->dir_x = -0.999999;
+	ptr->dir_x = -0.9999999999999;
 	ptr->press[0] = 0;
 	ptr->press[1] = 0;
 	ptr->press[2] = 0;
